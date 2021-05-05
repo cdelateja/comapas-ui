@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "874a0316-29bb-444f-b6a6-0fa69143c6f6"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -25,12 +28,23 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/cdelateja/assets/i18n/cdelateja",
+                "output": "/assets/i18n/cdelateja/"
+              },
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/cdelateja/assets/styles/styles.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {

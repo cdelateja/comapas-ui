@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "oauth": {
+      "url": "http://localhost:8002",
+      "getToken": "/oauth/token",
+      "refreshToken": "/oauth/token"
+    },
+    "comapasWs": {
+    }
+  }
+}
