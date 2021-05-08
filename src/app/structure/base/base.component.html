@@ -1,0 +1,17 @@
+<app-loading></app-loading>
+<ct-navbar>
+  <ct-navbar-brand [label]="'Comapas'"></ct-navbar-brand>
+  <ct-navbar-dropdown [label]="'Menu.Administration.home'"
+                      [icon]="faUserShield">
+    <ct-navbar-item [label]="'Menu.Administration.user'"
+                    [icon]="faUser"
+                    [routerLink]="'/comapas/admin/user'"></ct-navbar-item>
+    <ct-navbar-item [label]="'Menu.Administration.field'"
+                    [icon]="faKeyboard"
+                    [routerLink]="'/comapas/admin/field'"></ct-navbar-item>
+  </ct-navbar-dropdown>
+  <ct-navbar-body>
+    <router-outlet></router-outlet>
+  </ct-navbar-body>
+</ct-navbar>
+

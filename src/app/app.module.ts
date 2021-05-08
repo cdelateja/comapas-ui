@@ -9,15 +9,25 @@ import {CTModule} from "cdelateja";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
 import {MultiTranslateHttpLoader} from "ngx-translate-multi-http-loader";
-import { LoadingComponent } from './structure/loading/loading.component';
+import {LoadingComponent} from './structure/loading/loading.component';
 import {LoaderInterceptorService} from "./services/loader-interceptor.service";
-import { HomeLoginComponent } from './route/home-login/home-login.component';
+import {HomeLoginComponent} from './structure/home-login/home-login.component';
+import {HomeComponent} from './route/home/home.component';
+import {BaseComponent} from './structure/base/base.component';
+import {AdminComponent} from './route/admin/admin.component';
+import {UserComponent} from './route/admin/user/user.component';
+import {UserModalComponent} from './route/admin/user/user-modal/user-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
     HomeLoginComponent,
+    HomeComponent,
+    BaseComponent,
+    AdminComponent,
+    UserComponent,
+    UserModalComponent,
 
   ],
   imports: [

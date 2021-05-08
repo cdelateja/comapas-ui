@@ -1,0 +1,61 @@
+<div class="container-fluid main">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4>{{'Components.Structure.User.title' | translate}}</h4>
+
+          <div class="form-group">
+            <ct-textfield [placeHolder]="'Components.Structure.User.searchPlaceHolder'" #search
+                          (keyup)="searchByName(search.value)"></ct-textfield>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
+
+              <div class="float-right">
+                <button type="button" class="btn btn-primary" (click)="addUser()">
+                  {{'Core.btnAdd' | translate}}
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>{{'Components.Structure.User.id' | translate}}</th>
+                    <th>{{'Components.Structure.User.userName' | translate}}</th>
+                    <th>{{'Components.Structure.User.email' | translate}}</th>
+                    <th>{{'Components.Structure.User.ip' | translate}}</th>
+                    <th>{{'Components.Structure.User.active' | translate}}</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let user of users; let i = index">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.ip}}</td>
+                    <td>
+                      <fa-icon [ngClass]="{'text-success': user.active, 'text-danger': !user.active}"
+                               [icon]="user.active ? faCheck: faTimesCircle"></fa-icon>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary" (click)="editUser(user)">
+                        <fa-icon [icon]="faPencilAlt"></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-user-modal></app-user-modal>

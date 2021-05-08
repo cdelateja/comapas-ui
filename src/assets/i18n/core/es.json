@@ -1,78 +1,33 @@
 {
   "Menu": {
-    "altaPlantilla": "Alta de plantillas",
-    "buscarPlantilla": "Buscar plantillas",
-    "altaEmision": "Alta Emisión",
-    "buscarEmision": "Buscar Emisión"
+    "Administration": {
+      "home": "Administración",
+      "user": "User",
+      "field": "Campos"
+    }
   },
-  "AltaPlanitlla": {
-    "tituloCaracteristicas": "Caracteristicas disponibles",
-    "tituloPlantilla": "Plantilla",
-    "tituloCaracteristicasSel": "Caracteristicas seleccionadas",
-    "nombre": "Nombre",
-    "descripcion": "Descripción",
-    "mostrar": "Mostrar",
-    "formularioIncompleto": "Faltan campos por completar",
-    "confirmarEliminarOpcion": "Se va a eliminar la opcion ¿Desea continuar?",
-    "guardadoExito": "Plantilla guardada con éxito",
-    "guardarError": "Ocurrio un error al guardar la plantilla. Contacte al administrador",
-    "campoNoEditable": "Campo no editable por el instrumento",
-    "campoRequerido": "Requerido"
-  },
-  "BuscarPlantilla": {
-    "titulo": "Plantillas disponibles",
-    "tituloDatos": "Datos disponibles",
-    "tituloCaracteristicas": "Caracteristicas",
-    "etiquetaTotal": "Total de plantillas",
-    "etiquetaActivos": "Total de plantillas activas",
-    "etiquetaInactivos": "Total de plantillas inactivas",
-    "buscarPlantilla": "Buscar por nombre",
-    "eliminarError": "No fue posible borrar la plantilla"
-  },
-  "AltaInstrumento": {
-    "success": "Se ha guardado con exito el instrumento",
-    "error": "Ha ocurrido un error al guardar el instrumento",
-    "plantilla": "Plantilla",
-    "clavePizarra": "Clave Pizarra",
-    "isin": "Isin",
-    "cusip": "Cusip",
-    "sedol": "Sedol",
-    "tipoValor": "Tipo Valor",
-    "emisora": "Emisora",
-    "serie": "Serie",
-    "emisor": "Emisor",
-    "tipoEmisor": "Tipo de Emisor",
-    "comentario": "Comentario",
-    "patternClavePizarra": "La campo debe er alfanumérico, en mayúsculas y con formato TV_EMISORA_SERIE",
-    "patternEmisora": "El campo debe ser alfanumerico y en mayúsculas",
-    "confirmarCambioPlantilla": "Se modificó información del instrumento. ¿Desea proceder con el cambio?"
-  },
-  "BuscarInstrumento": {
-    "titulo": "Emisiones disponible",
-    "detalleEmision": "Detalle de Emisión",
-    "etiquetaTotal": "Total de emisiones",
-    "etiquetaActivos": "Total de emisiones activas",
-    "etiquetaInactivos": "Total de emisiones inactivas",
-    "etiquetaPendientes": "Total de emisiones pendientes",
-    "etiquetaHistoricas": "Total de emisiones históricas",
-    "buscarInstrumento": "Buscar por nombre",
-    "success": "Se ha activado con éxito el Instrumento",
-    "error": "Ha ocurrido un error al activar el Instrumento",
-    "activo":  "Activo",
-    "inactivo":  "Inactivo",
-    "pendiente":  "Pendiente",
-    "historico":  "Histórico"
-  },
-  "Facultad": {
-    "plantillaAltaMenu": "GAR_PLANTILLA_ALTA_MENU",
-    "plantillaBuscarMenu": "GAR_PLANTILLA_BUSCAR_MENU",
-    "plantillaDetalle": "GAR_PLANTILLA_DETALLE",
-    "plantillaEditar": "GAR_PLANTILLA_EDITAR",
-    "plantillaEliminar": "GAR_PLANTILLA_ELIMINAR",
-    "emisionBuscarMenu": "GAR_EMISION_BUSCAR_MENU",
-    "emisionAgregar": "GAR_EMISION_AGREGAR",
-    "emisionDetalle": "GAR_EMISION_DETALLE",
-    "emisionEditar": "GAR_EMISION_EDITAR",
-    "emisionEventos": "GAR_EMISION_EVENTOS"
+  "Components": {
+    "Structure": {
+      "User": {
+        "title": "Gestión de usuarios",
+        "searchPlaceHolder": "Busca por nombre de usuario",
+        "id": "ID",
+        "userName": "Nombre de usuario",
+        "password": "Contraseña",
+        "secretKey": "Llave secreta",
+        "email": "Correo",
+        "active": "Estatus",
+        "ip": "IP"
+      },
+      "UserModal": {
+        "title": "Datos del usuario",
+        "id": "ID",
+        "userName": "Nombre de usuario",
+        "password": "Contraseña",
+        "secretKey": "Llave secreta",
+        "email": "Correo",
+        "ip": "IP"
+      }
+    }
   }
 }

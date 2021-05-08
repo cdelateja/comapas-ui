@@ -1,0 +1,32 @@
+<div class="modal fade" id="userModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{'Components.Structure.UserModal.title' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formGroup" [attr.id]="formId">
+          <div class="form-row">
+            <div class="col-md">
+              <ct-textfield [label]="'Components.Structure.User.id'"
+                            [formControlName]="'id'"></ct-textfield>
+              <ct-textfield [label]="'Components.Structure.User.userName'"
+                            [formControlName]="'username'"></ct-textfield>
+              <ct-textfield [label]="'Components.Structure.User.password'"
+                            [formControlName]="'password'"></ct-textfield>
+              <ct-textfield [label]="'Components.Structure.User.email'"
+                            [formControlName]="'email'"></ct-textfield>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <ct-button [label]="'Core.btnCancel'" [type]="buttonType.DANGER" (click)="close()"></ct-button>
+        <ct-button [label]="'Core.btnSave'" [type]="buttonType.PRIMARY" (click)="save()"></ct-button>
+      </div>
+    </div>
+  </div>
+</div>

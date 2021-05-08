@@ -1,0 +1,43 @@
+
+.body-login {
+  height: 100vh;
+  background-color: #316cdb;
+}
+
+.login {
+  width: 700px;
+  margin: 0 auto;
+  padding-top: 175px;
+}
+
+.login-container {
+  padding: 50px 105px;
+  border-radius: 20px;
+}
+
+.login-header {
+  position: relative;
+  height: 157px;
+  padding: 21px;
+  background-color: transparent;
+  border: transparent;
+
+  .icon {
+    top: 99px;
+    position: absolute;
+    left: 39%;
+    background: white;
+    color: #7b7b7b;
+    font-size: 62px;
+    height: 135px;
+    width: 135px;
+    border-radius: 50%;
+
+    fa-icon {
+      position: relative;
+      top: 7px;
+    }
+  }
+}
+
+
