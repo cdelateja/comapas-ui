@@ -5,6 +5,7 @@ import {HomeComponent} from "./route/home/home.component";
 import {BaseComponent} from "./structure/base/base.component";
 import {UserComponent} from "./route/admin/user/user.component";
 import {AdminComponent} from "./route/admin/admin.component";
+import {FieldComponent} from "./route/admin/field/field.component";
 
 const routes: Routes = [
   {path: 'login', component: HomeLoginComponent,},
@@ -21,6 +22,9 @@ const routes: Routes = [
         children: [
           {
             path: 'user', component: UserComponent
+          },
+          {
+            path: 'field', component: FieldComponent
           },
           {path: '**', pathMatch: 'full', redirectTo: '/comapas/inicio'},
         ]

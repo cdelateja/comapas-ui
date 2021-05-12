@@ -4,9 +4,11 @@
   <ct-navbar-dropdown [label]="'Menu.Administration.home'"
                       [icon]="faUserShield">
     <ct-navbar-item [label]="'Menu.Administration.user'"
+                    [appAuthorized]="'adminUsers'"
                     [icon]="faUser"
                     [routerLink]="'/comapas/admin/user'"></ct-navbar-item>
     <ct-navbar-item [label]="'Menu.Administration.field'"
+                    [appAuthorized]="'adminFields'"
                     [icon]="faKeyboard"
                     [routerLink]="'/comapas/admin/field'"></ct-navbar-item>
   </ct-navbar-dropdown>

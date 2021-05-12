@@ -28,6 +28,7 @@ export class User {
   public secretKey = '';
   public ip = '';
   public active = true;
+  public idRole: number;
 }
 
 export class UserReq {
@@ -35,4 +36,41 @@ export class UserReq {
   public username = '';
   public password = '';
   public email = '';
+  public role: Role = null;
+  public idRole: number;
+}
+
+export class IdReq {
+  public id: number;
+}
+
+export class Role {
+  public idRole: number = 0;
+  public name = '';
+  public codeName = '';
+  public active: Boolean;
+}
+
+export class Field {
+  public idField: number = 0;
+  public name = '';
+  public label = '';
+  public type = '';
+  public value = '';
+  public caption = '';
+  public catalog = '';
+  public evidence = true;
+  public score = 0;
+}
+
+export class FieldReq {
+  public idField: number = 0;
+  public name = '';
+  public label = '';
+  public type = '';
+  public value = '';
+  public caption = '';
+  public catalog = '';
+  public evidence = true;
+  public score = 0;
 }

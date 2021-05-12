@@ -17,7 +17,11 @@
         "secretKey": "Llave secreta",
         "email": "Correo",
         "active": "Estatus",
-        "ip": "IP"
+        "ip": "IP",
+        "role": "Perfil",
+        "attention": "Atencion",
+        "activate": "Se va a activar el usuario ¿Desea continuar?",
+        "deactivate": "Se va a desactivar el usuario. ¿Desea continuar?"
       },
       "UserModal": {
         "title": "Datos del usuario",
@@ -26,7 +30,30 @@
         "password": "Contraseña",
         "secretKey": "Llave secreta",
         "email": "Correo",
-        "ip": "IP"
+        "role": "Perfil"
+      },
+      "Field": {
+        "title": "Gestión de preguntas",
+        "searchPlaceHolder": "Busca por pregunta",
+        "idField": "ID",
+        "label": "Pregunta",
+        "name": "Nombre",
+        "score": "Puntaje",
+        "type": "Tipo",
+        "value": "Valor default",
+        "catalog": "Catalogo",
+        "evidence": "Evidencia"
+      },
+      "FieldModal": {
+        "title": "Datos de la pregunta",
+        "idField": "ID",
+        "label": "Pregunta",
+        "name": "Nombre",
+        "score": "Puntaje",
+        "type": "Tipo",
+        "value": "Valor default",
+        "catalog": "Catalogo",
+        "evidence": "Evidencia"
       }
     }
   }

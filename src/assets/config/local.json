@@ -6,6 +6,7 @@
       "refreshToken": "/oauth/token"
     },
     "comapasWs": {
+      "url": "http://localhost:8003"
     }
   }
 }

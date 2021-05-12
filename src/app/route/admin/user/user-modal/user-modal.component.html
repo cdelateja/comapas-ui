@@ -19,6 +19,11 @@
                             [formControlName]="'password'"></ct-textfield>
               <ct-textfield [label]="'Components.Structure.User.email'"
                             [formControlName]="'email'"></ct-textfield>
+              <ct-combo-box [label]="'Components.Structure.User.role'"
+                            [eqVal]="'idRole'"
+                            [values]="roles"
+                            [itemCaption]="'name'"
+                            [formControlName]="'role'"></ct-combo-box>
             </div>
           </div>
         </form>

@@ -1,7 +1,8 @@
 @import "common";
 
 .form-group {
-  input {
+  input,
+  select {
     border: 0;
     border-bottom: 1px solid $input-base-color;
     border-radius: 0;

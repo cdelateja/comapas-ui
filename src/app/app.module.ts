@@ -17,6 +17,9 @@ import {BaseComponent} from './structure/base/base.component';
 import {AdminComponent} from './route/admin/admin.component';
 import {UserComponent} from './route/admin/user/user.component';
 import {UserModalComponent} from './route/admin/user/user-modal/user-modal.component';
+import {AuthorizedDirective} from './directives/authorized.directive';
+import { FieldComponent } from './route/admin/field/field.component';
+import { FieldModalComponent } from './route/admin/field/field-modal/field-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import {UserModalComponent} from './route/admin/user/user-modal/user-modal.compo
     AdminComponent,
     UserComponent,
     UserModalComponent,
-
+    AuthorizedDirective,
+    FieldComponent,
+    FieldModalComponent,
   ],
   imports: [
     BrowserModule,

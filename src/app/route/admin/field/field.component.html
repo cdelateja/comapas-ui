@@ -1,0 +1,65 @@
+<div class="container-fluid main">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4>{{'Components.Structure.Field.title' | translate}}</h4>
+
+          <div class="form-group">
+            <ct-textfield [placeHolder]="'Components.Structure.Field.searchPlaceHolder'" #search
+                          (keyup)="searchByName(search.value)"></ct-textfield>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
+
+              <div class="float-right">
+                <button type="button" class="btn btn-primary" (click)="addField()">
+                  {{'Core.btnAdd' | translate}}
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>{{'Components.Structure.Field.idField' | translate}}</th>
+                    <th>{{'Components.Structure.Field.label' | translate}}</th>
+                    <th>{{'Components.Structure.Field.name' | translate}}</th>
+                    <th>{{'Components.Structure.Field.score' | translate}}</th>
+                    <th>{{'Components.Structure.Field.type' | translate}}</th>
+                    <th>{{'Components.Structure.Field.value' | translate}}</th>
+                    <th>{{'Components.Structure.Field.catalog' | translate}}</th>
+                    <th>{{'Components.Structure.Field.evidence' | translate}}</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let field of fields; let i = index">
+                    <td>{{field.idField}}</td>
+                    <td>{{field.label}}</td>
+                    <td>{{field.name}}</td>
+                    <td>{{field.score}}</td>
+                    <td>{{field.type}}</td>
+                    <td>{{field.value}}</td>
+                    <td>{{field.catalog}}</td>
+                    <td>{{field.evidence}}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary" (click)="editField(field)">
+                        <fa-icon [icon]="faPencilAlt"></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-field-modal [refresh]="refresh"
+                 [open]="open"></app-field-modal>

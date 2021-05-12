@@ -27,6 +27,7 @@
                     <th>{{'Components.Structure.User.userName' | translate}}</th>
                     <th>{{'Components.Structure.User.email' | translate}}</th>
                     <th>{{'Components.Structure.User.ip' | translate}}</th>
+                    <th>{{'Components.Structure.User.role' | translate}}</th>
                     <th>{{'Components.Structure.User.active' | translate}}</th>
                     <th></th>
                   </tr>
@@ -38,8 +39,19 @@
                     <td>{{user.email}}</td>
                     <td>{{user.ip}}</td>
                     <td>
-                      <fa-icon [ngClass]="{'text-success': user.active, 'text-danger': !user.active}"
-                               [icon]="user.active ? faCheck: faTimesCircle"></fa-icon>
+                      {{getRole(user.idRole)}}
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-success"
+                              *ngIf="user.active"
+                              (click)="changeActive(user)">
+                        <fa-icon [icon]="faCheck"></fa-icon>
+                      </button>
+                      <button type="button" class="btn btn-danger"
+                              *ngIf="!user.active"
+                              (click)="changeActive(user)">
+                        <fa-icon [icon]="faTimesCircle"></fa-icon>
+                      </button>
                     </td>
                     <td>
                       <button type="button" class="btn btn-primary" (click)="editUser(user)">
@@ -58,4 +70,5 @@
     </div>
   </div>
 </div>
-<app-user-modal></app-user-modal>
+<app-user-modal [refresh]="refresh"
+                [open]="open"></app-user-modal>
