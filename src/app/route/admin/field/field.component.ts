@@ -1,11 +1,10 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {faPencilAlt} from '@fortawesome/free-solid-svg-icons/faPencilAlt';
-import {faTimesCircle} from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import {Field} from '../../../dto/class.definition';
 import {Subscription} from 'rxjs';
 import {FieldService} from '../../../services/field.service';
 import {ClientService, Response} from 'cdelateja';
+import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 
 @Component({
   selector: 'app-field',
@@ -16,17 +15,20 @@ export class FieldComponent implements OnInit, OnDestroy {
 
   public faPencilAlt = faPencilAlt;
   public faCheck = faCheck;
-  public faTimesCircle = faTimesCircle;
   private subscriptions: Subscription[] = [];
   public fields: Field[] = [];
   public fieldsCache: Field[] = [];
-  public open: EventEmitter<Field> = new EventEmitter()
+  public open: EventEmitter<Field> = new EventEmitter();
+  public refresh: EventEmitter<Field> = new EventEmitter();
 
   constructor(private fieldService: FieldService) {
   }
 
   public ngOnInit(): void {
     this.findFields();
+    this.refresh.subscribe(() => {
+      this.findFields();
+    });
   }
 
   public ngOnDestroy(): void {
@@ -41,7 +43,7 @@ export class FieldComponent implements OnInit, OnDestroy {
           this.fieldsCache = response.result;
         }
       })
-    )
+    );
   }
 
   public addField(): void {
@@ -64,10 +66,6 @@ export class FieldComponent implements OnInit, OnDestroy {
     } else {
       this.fields = this.fieldsCache;
     }
-  }
-
-  public refresh(): void {
-    this.findFields();
   }
 
 }

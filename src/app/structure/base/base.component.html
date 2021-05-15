@@ -11,6 +11,14 @@
                     [appAuthorized]="'adminFields'"
                     [icon]="faKeyboard"
                     [routerLink]="'/comapas/admin/field'"></ct-navbar-item>
+    <ct-navbar-item [label]="'Menu.Administration.criterion'"
+                    [appAuthorized]="'adminCriterion'"
+                    [icon]="faObjectGroup"
+                    [routerLink]="'/comapas/admin/criterion'"></ct-navbar-item>
+    <ct-navbar-item [label]="'Menu.Administration.sandBox'"
+                    [appAuthorized]="'adminSandBox'"
+                    [icon]="faToolbox"
+                    [routerLink]="'/comapas/admin/sandBox'"></ct-navbar-item>
   </ct-navbar-dropdown>
   <ct-navbar-body>
     <router-outlet></router-outlet>

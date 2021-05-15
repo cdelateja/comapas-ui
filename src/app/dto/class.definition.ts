@@ -52,25 +52,50 @@ export class Role {
 }
 
 export class Field {
-  public idField: number = 0;
+  public idField: number = null;
   public name = '';
   public label = '';
-  public type = '';
-  public value = '';
-  public caption = '';
+  public type = null;
   public catalog = '';
-  public evidence = true;
+  public evidence = false;
+  public required = false;
   public score = 0;
 }
 
 export class FieldReq {
-  public idField: number = 0;
+  public idField: number = null;
   public name = '';
   public label = '';
-  public type = '';
-  public value = '';
-  public caption = '';
-  public catalog = '';
-  public evidence = true;
+  public type = null;
+  public catalog = null;
+  public evidence = false;
+  public required = false;
   public score = 0;
+}
+
+export class Criterion {
+  public idCriterion: number = null;
+  public name = '';
+  public code = '';
+  public fields: CriterionField[] = [];
+}
+
+export class CriterionField {
+  public idCriterion: number = null;
+  public idField: number = null;
+  public field: Field = null;
+}
+
+export class CriterionReq {
+  public idCriterion: number = null;
+  public name = '';
+}
+
+export class CriterionFieldReq {
+  public idCriterion: number = null;
+  public fields: number[] = [];
+}
+
+export class SelectField extends Field {
+  public select = false;
 }

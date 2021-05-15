@@ -1,0 +1,49 @@
+<div class="modal fade" id="criterionFieldModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'Components.Structure.Criterion.CriterionFieldModal.title' | translate}}
+          {{criterion.name}}
+        </h5>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <ct-textfield [placeHolder]="'Components.Structure.Field.searchPlaceHolder'" #search
+                        (keyup)="searchByName(search.value)"></ct-textfield>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>{{'Components.Structure.Criterion.CriterionFieldModal.label' | translate}}</th>
+              <th>{{'Components.Structure.Criterion.CriterionFieldModal.name' | translate}}</th>
+              <th>{{'Components.Structure.Criterion.CriterionFieldModal.score' | translate}}</th>
+              <th>{{'Components.Structure.Criterion.CriterionFieldModal.evidence' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let field of fields; let i = index">
+              <td>
+                <ct-check-box [(ngModel)]="field.select"></ct-check-box>
+              </td>
+              <td>{{field.label}}</td>
+              <td>{{field.name}}</td>
+              <td>{{field.score}}</td>
+              <td class="text-success">
+                <fa-icon *ngIf="field.evidence" [icon]="faCheck"></fa-icon>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <ct-button [label]="'Core.btnCancel'" [type]="buttonType.DANGER" (click)="close()"></ct-button>
+          <ct-button [label]="'Core.btnSave'" [type]="buttonType.PRIMARY" (click)="save()"></ct-button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -2,8 +2,10 @@
   "Menu": {
     "Administration": {
       "home": "Administración",
-      "user": "User",
-      "field": "Campos"
+      "user": "Usuarios",
+      "field": "Campos",
+      "criterion": "Criterios",
+      "sandBox": "Caja de arena"
     }
   },
   "Components": {
@@ -21,16 +23,16 @@
         "role": "Perfil",
         "attention": "Atencion",
         "activate": "Se va a activar el usuario ¿Desea continuar?",
-        "deactivate": "Se va a desactivar el usuario. ¿Desea continuar?"
-      },
-      "UserModal": {
-        "title": "Datos del usuario",
-        "id": "ID",
-        "userName": "Nombre de usuario",
-        "password": "Contraseña",
-        "secretKey": "Llave secreta",
-        "email": "Correo",
-        "role": "Perfil"
+        "deactivate": "Se va a desactivar el usuario. ¿Desea continuar?",
+        "UserModal": {
+          "title": "Datos del usuario",
+          "id": "ID",
+          "userName": "Nombre de usuario",
+          "password": "Contraseña",
+          "secretKey": "Llave secreta",
+          "email": "Correo",
+          "role": "Perfil"
+        }
       },
       "Field": {
         "title": "Gestión de preguntas",
@@ -42,18 +44,47 @@
         "type": "Tipo",
         "value": "Valor default",
         "catalog": "Catalogo",
-        "evidence": "Evidencia"
+        "evidence": "Evidencia",
+        "required": "Requerido",
+        "FieldModal": {
+          "title": "Datos de la pregunta",
+          "idField": "ID",
+          "label": "Pregunta",
+          "name": "Nombre",
+          "score": "Puntaje",
+          "type": "Tipo",
+          "value": "Valor default",
+          "catalog": "Catalogo",
+          "evidence": "Evidencia",
+          "required": "Requerido"
+        }
       },
-      "FieldModal": {
-        "title": "Datos de la pregunta",
-        "idField": "ID",
-        "label": "Pregunta",
-        "name": "Nombre",
-        "score": "Puntaje",
-        "type": "Tipo",
-        "value": "Valor default",
-        "catalog": "Catalogo",
-        "evidence": "Evidencia"
+      "Criterion": {
+        "title": "Gestión de criterios",
+        "fields": "Campos",
+        "CriterionModal": {
+          "title": "Datos del criterio",
+          "idCriterion": "ID",
+          "name": "Nombre"
+        },
+        "CriterionFieldModal": {
+          "title": "Criterio: ",
+          "idCriterion": "ID",
+          "name": "Nombre",
+          "idField": "ID",
+          "label": "Pregunta",
+          "score": "Puntaje",
+          "type": "Tipo",
+          "value": "Valor default",
+          "catalog": "Catalogo",
+          "evidence": "Evidencia"
+        }
+      },
+      "SandBox": {
+        "title": "Organiza tu formulario",
+        "SandBoxCriterionModal": {
+
+        }
       }
     }
   }

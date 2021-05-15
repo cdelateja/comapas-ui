@@ -25,12 +25,11 @@
                   <tr>
                     <th>{{'Components.Structure.Field.idField' | translate}}</th>
                     <th>{{'Components.Structure.Field.label' | translate}}</th>
-                    <th>{{'Components.Structure.Field.name' | translate}}</th>
                     <th>{{'Components.Structure.Field.score' | translate}}</th>
                     <th>{{'Components.Structure.Field.type' | translate}}</th>
-                    <th>{{'Components.Structure.Field.value' | translate}}</th>
                     <th>{{'Components.Structure.Field.catalog' | translate}}</th>
                     <th>{{'Components.Structure.Field.evidence' | translate}}</th>
+                    <th>{{'Components.Structure.Field.required' | translate}}</th>
                     <th></th>
                   </tr>
                   </thead>
@@ -38,12 +37,15 @@
                   <tr *ngFor="let field of fields; let i = index">
                     <td>{{field.idField}}</td>
                     <td>{{field.label}}</td>
-                    <td>{{field.name}}</td>
                     <td>{{field.score}}</td>
                     <td>{{field.type}}</td>
-                    <td>{{field.value}}</td>
                     <td>{{field.catalog}}</td>
-                    <td>{{field.evidence}}</td>
+                    <td class="text-success">
+                      <fa-icon *ngIf="field.evidence" [icon]="faCheck"></fa-icon>
+                    </td>
+                    <td class="text-success">
+                      <fa-icon *ngIf="field.required" [icon]="faCheck"></fa-icon>
+                    </td>
                     <td>
                       <button type="button" class="btn btn-primary" (click)="editField(field)">
                         <fa-icon [icon]="faPencilAlt"></fa-icon>

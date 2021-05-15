@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
-import {IdReq, Role, User} from '../../../dto/class.definition';
+import {Field, IdReq, Role, User} from '../../../dto/class.definition';
 import {ClientService, ConfirmationDialog, Response} from 'cdelateja';
 import {Subscription} from "rxjs";
 import {faPencilAlt} from "@fortawesome/free-solid-svg-icons/faPencilAlt";
@@ -24,7 +24,7 @@ export class UserComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public roles: Role[] = [];
   private user: User;
-
+  public refresh: EventEmitter<Field> = new EventEmitter();
   public open: EventEmitter<User> = new EventEmitter()
 
   constructor(private userService: UserService,
@@ -52,6 +52,9 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.refresh.subscribe(() => {
+      this.findUsers();
+    });
     this.findUsers();
   }
 
@@ -107,10 +110,6 @@ export class UserComponent implements OnInit, OnDestroy {
         :
         this.translate.instant('Components.Structure.User.activate')
     );
-  }
-
-  public refresh(): void {
-    this.findUsers();
   }
 
 }

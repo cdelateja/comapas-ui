@@ -14,7 +14,7 @@ declare var $: any;
 @FormValidator({
   formId: '',
   validators: [
-    NotEmpty.generate(['label', 'name', 'score']),
+    NotEmpty.generate(['label', 'score']),
     NotNull.generate(['type'])
   ],
   object: new FieldReq()
@@ -22,11 +22,12 @@ declare var $: any;
 export class FieldModalComponent extends AbstractValidator implements OnInit {
 
   @Input()
-  public refresh: () => void;
+  public refresh: EventEmitter<Field> = new EventEmitter();
 
   @Input()
   public open: EventEmitter<Field> = new EventEmitter();
 
+  public hide = true;
   public types: string[] = [];
 
   constructor(protected translate: TranslateService,
@@ -34,17 +35,32 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
     super(translate);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.disableField('idField');
     this.subscriptions.push(
       this.open.subscribe((field: Field) => {
         this.setField(field)
         this.toggle();
-      }));
+      })
+    );
 
     this.subscriptions.push(
       this.fieldService.getTypes().subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
           this.types = response.result;
+        }
+      })
+    );
+    this.subscriptions.push(
+      this.getFieldObservable('type').subscribe((value) => {
+        this.disableField('catalog');
+        this.removeValidators(['catalog']);
+        this.setValue('catalog', null);
+        this.hide = true;
+        if ('radio' === value || 'select' === value) {
+          this.enabledField('catalog');
+          this.addValidators([NotEmpty.generate(['catalog'])])
+          this.hide = false;
         }
       })
     );
@@ -63,7 +79,18 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
   }
 
   public save(): void {
-
+    if (this.validateForm()) {
+      const req: FieldReq = this.formGroup.getRawValue();
+      req.catalog = req.catalog === null ? [] : req.catalog;
+      this.subscriptions.push(
+        this.fieldService.saveField(req).subscribe((response: Response) => {
+          if (ClientService.validateData(response)) {
+            this.refresh.next(response.result);
+            this.toggle();
+          }
+        })
+      );
+    }
   }
 
 }

@@ -1,0 +1,65 @@
+<div class="container-fluid main">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-12">
+              <h4>{{'Components.Structure.Criterion.title' | translate}}</h4>
+
+              <div class="float-right">
+                <button type="button" class="btn btn-primary" (click)="addCriterion()">
+                  {{'Core.btnAdd' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-md-3" *ngFor="let criterion of criterionList; let i = index">
+              <div class="card criterion-card">
+                <div class="card-header">
+                  <h5 class="card-title">
+                    {{criterion.name}}
+                  </h5>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center"
+                      *ngFor="let field of criterion.fields; let i = index">
+                    {{field.field.label}}
+                    <span class="badge badge-primary badge-pill">
+                      {{field.field.score}}
+                    </span>
+                  </li>
+                </ul>
+
+                <div class="card-body">
+                  <button type="button" class="btn btn-secondary mr-2" (click)="edit(criterion)">
+                    {{'Core.btnEdit' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary" (click)="addFields(criterion)">
+                    {{'Components.Structure.Criterion.fields' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-criterion-modal [open]="open"
+                     [refresh]="refresh"></app-criterion-modal>
+<app-criterion-field-modal [fields]="fields"
+                           [fieldsCache]="fieldsCache"
+                           [open]="openCriField"
+                           [refresh]="refresh"></app-criterion-field-modal>

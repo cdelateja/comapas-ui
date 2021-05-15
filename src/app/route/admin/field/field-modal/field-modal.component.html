@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{'Components.Structure.FieldModal.title' | translate}}</h5>
+        <h5 class="modal-title">{{'Components.Structure.Field.FieldModal.title' | translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -10,24 +10,39 @@
       <div class="modal-body">
         <form [formGroup]="formGroup" [attr.id]="formId">
           <div class="form-row">
-            <div class="col-md">
-              <ct-textfield [label]="'Components.Structure.FieldModal.idField'"
+            <div class="col-md-12 d-none">
+              <ct-textfield [label]="'Components.Structure.Field.FieldModal.idField'"
                             [formControlName]="'idField'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.FieldModal.label'"
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <ct-textfield [label]="'Components.Structure.Field.FieldModal.label'"
                             [formControlName]="'label'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.FieldModal.name'"
-                            [formControlName]="'name'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.FieldModal.score'"
-                            [formControlName]="'score'"></ct-textfield>
-              <ct-combo-box [label]="'Components.Structure.FieldModal.type'"
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <ct-combo-box [label]="'Components.Structure.Field.FieldModal.type'"
                             [values]="types"
                             [formControlName]="'type'"></ct-combo-box>
-              <ct-textfield [label]="'Components.Structure.FieldModal.value'"
-                            [formControlName]="'value'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.FieldModal.catalog'"
-                            [formControlName]="'catalog'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.FieldModal.evidence'"
-                            [formControlName]="'evidence'"></ct-textfield>
+            </div>
+          </div>
+          <div class="form-row" [ngClass]="{'d-none': hide}">
+            <div class="col-md">
+              <ct-catalog [formControlName]="'catalog'"></ct-catalog>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 col-sm-12">
+              <ct-textfield [label]="'Components.Structure.Field.FieldModal.score'"
+                            [formControlName]="'score'"></ct-textfield>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-2 col-sm-12">
+              <ct-switch [label]="'Components.Structure.Field.FieldModal.evidence'"
+                         [formControlName]="'evidence'"></ct-switch>
+            </div>
+            <div class="col-md-2 col-sm-12">
+              <ct-switch [label]="'Components.Structure.Field.FieldModal.required'"
+                         [formControlName]="'required'"></ct-switch>
             </div>
           </div>
         </form>

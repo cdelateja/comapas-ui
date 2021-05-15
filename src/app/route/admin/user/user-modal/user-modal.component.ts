@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {AbstractValidator, ClientService, FormValidator, NotEmpty, NotNull, Response} from "cdelateja";
 import {TranslateService} from "@ngx-translate/core";
 import {UserService} from "../../../../services/user.service";
@@ -23,7 +23,7 @@ declare var $: any;
 export class UserModalComponent extends AbstractValidator implements OnInit {
 
   @Input()
-  public refresh: () => void;
+  public refresh: EventEmitter<User> = new EventEmitter();
 
   @Input()
   public open: EventEmitter<User> = new EventEmitter();
@@ -84,7 +84,7 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
       this.subscriptions.push(
         this.userService.save(userReq).subscribe((response: Response) => {
           if (ClientService.validateData(response)) {
-            this.refresh();
+            this.refresh.next(response.result);
             this.toggle();
           }
         }));
