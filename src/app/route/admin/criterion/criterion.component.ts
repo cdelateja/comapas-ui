@@ -12,6 +12,8 @@ import {FieldService} from "../../../services/field.service";
 })
 export class CriterionComponent implements OnInit, OnDestroy {
 
+  public PREFIX = 'Components.Structure.Criterion';
+
   public criterionList: Criterion[] = [];
   public criterionListCache: Criterion[] = [];
   private subscriptions: Subscription[] = [];

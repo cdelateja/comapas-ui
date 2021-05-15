@@ -3,10 +3,10 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h4>{{'Components.Structure.Field.title' | translate}}</h4>
+          <h1>{{PREFIX + '.title' | translate}}</h1>
 
           <div class="form-group">
-            <ct-textfield [placeHolder]="'Components.Structure.Field.searchPlaceHolder'" #search
+            <ct-textfield [placeHolder]="PREFIX+'.searchPlaceHolder'" #search
                           (keyup)="searchByName(search.value)"></ct-textfield>
           </div>
 
@@ -23,13 +23,13 @@
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th>{{'Components.Structure.Field.idField' | translate}}</th>
-                    <th>{{'Components.Structure.Field.label' | translate}}</th>
-                    <th>{{'Components.Structure.Field.score' | translate}}</th>
-                    <th>{{'Components.Structure.Field.type' | translate}}</th>
-                    <th>{{'Components.Structure.Field.catalog' | translate}}</th>
-                    <th>{{'Components.Structure.Field.evidence' | translate}}</th>
-                    <th>{{'Components.Structure.Field.required' | translate}}</th>
+                    <th>{{PREFIX + '.idField' | translate}}</th>
+                    <th>{{PREFIX + '.label' | translate}}</th>
+                    <th>{{PREFIX + '.score' | translate}}</th>
+                    <th>{{PREFIX + '.type' | translate}}</th>
+                    <th>{{PREFIX + '.catalog' | translate}}</th>
+                    <th>{{PREFIX + '.evidence' | translate}}</th>
+                    <th>{{PREFIX + '.required' | translate}}</th>
                     <th></th>
                   </tr>
                   </thead>

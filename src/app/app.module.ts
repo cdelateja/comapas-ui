@@ -19,12 +19,26 @@ import {UserModalComponent} from './route/admin/user/user-modal/user-modal.compo
 import {AuthorizedDirective} from './directives/authorized.directive';
 import {FieldComponent} from './route/admin/field/field.component';
 import {FieldModalComponent} from './route/admin/field/field-modal/field-modal.component';
-import {TypeForm} from './common/components/dynamic.form';
+import {DynamicForm} from './common/components/dynamic.form';
 import {CriterionComponent} from './route/admin/criterion/criterion.component';
 import {CriterionModalComponent} from './route/admin/criterion/criterion-modal/criterion-modal.component';
 import {CriterionFieldModalComponent} from './route/admin/criterion/criterion-field-modal/criterion-field-modal.component';
 import {SandBoxComponent} from './route/admin/sand-box/sand-box.component';
-import { SandBoxCriterionComponent } from './route/admin/sand-box/sand-box-criterion/sand-box-criterion.component';
+import {SandBoxCriterionComponent} from './route/admin/sand-box/sand-box-criterion/sand-box-criterion.component';
+import {SandBoxCriterionCardComponent} from './route/admin/sand-box/sand-box-criterion-card/sand-box-criterion-card.component';
+import {DynamicFieldDirective} from './directives/dynamic-field.directive';
+import {DynamicFieldComponent} from "./common/components/dynamic.field.component";
+import {
+  DynamicCheckBoxComponent,
+  DynamicComboBoxComponent,
+  DynamicDatePickerComponent,
+  DynamicLabelComponent,
+  DynamicNumberFieldComponent,
+  DynamicRadioButtonComponent,
+  DynamicTextFieldComponent
+} from "./common/components/wrapper";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -39,12 +53,22 @@ import { SandBoxCriterionComponent } from './route/admin/sand-box/sand-box-crite
     AuthorizedDirective,
     FieldComponent,
     FieldModalComponent,
-    TypeForm,
+    DynamicForm,
     CriterionComponent,
     CriterionModalComponent,
     CriterionFieldModalComponent,
     SandBoxComponent,
-    SandBoxCriterionComponent
+    SandBoxCriterionComponent,
+    SandBoxCriterionCardComponent,
+    DynamicFieldDirective,
+    DynamicFieldComponent,
+    DynamicLabelComponent,
+    DynamicTextFieldComponent,
+    DynamicDatePickerComponent,
+    DynamicCheckBoxComponent,
+    DynamicNumberFieldComponent,
+    DynamicComboBoxComponent,
+    DynamicRadioButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -54,13 +78,15 @@ import { SandBoxCriterionComponent } from './route/admin/sand-box/sand-box-crite
     FontAwesomeModule,
     CTModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    DragDropModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

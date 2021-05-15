@@ -1,12 +1,12 @@
-<div class="container-lg container-fluid">
+<div class="container-fluid main">
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h4>{{'Components.Structure.User.title' | translate}}</h4>
+          <h1>{{PREFIX + '.title' | translate}}</h1>
 
           <div class="form-group">
-            <ct-textfield [placeHolder]="'Components.Structure.User.searchPlaceHolder'" #search
+            <ct-textfield [placeHolder]="PREFIX+'.searchPlaceHolder'" #search
                           (keyup)="searchByName(search.value)"></ct-textfield>
           </div>
 
@@ -23,12 +23,12 @@
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th>{{'Components.Structure.User.id' | translate}}</th>
-                    <th>{{'Components.Structure.User.userName' | translate}}</th>
-                    <th>{{'Components.Structure.User.email' | translate}}</th>
-                    <th>{{'Components.Structure.User.ip' | translate}}</th>
-                    <th>{{'Components.Structure.User.role' | translate}}</th>
-                    <th>{{'Components.Structure.User.active' | translate}}</th>
+                    <th>{{PREFIX + '.id' | translate}}</th>
+                    <th>{{PREFIX + '.userName' | translate}}</th>
+                    <th>{{PREFIX + '.email' | translate}}</th>
+                    <th>{{PREFIX + '.ip' | translate}}</th>
+                    <th>{{PREFIX + '.role' | translate}}</th>
+                    <th>{{PREFIX + '.active' | translate}}</th>
                     <th></th>
                   </tr>
                   </thead>

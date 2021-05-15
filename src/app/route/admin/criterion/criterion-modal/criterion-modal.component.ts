@@ -20,6 +20,8 @@ declare var $: any;
 })
 export class CriterionModalComponent extends AbstractValidator implements OnInit {
 
+  public PREFIX = 'Components.Structure.Criterion.Modal';
+
   @Input()
   public refresh: EventEmitter<Field> = new EventEmitter();
 
@@ -50,7 +52,7 @@ export class CriterionModalComponent extends AbstractValidator implements OnInit
   }
 
   private toggle(): void {
-    $('#criterionModal').modal('toggle');
+    $('#CriterionModal').modal('toggle');
   }
 
   public save(): void {

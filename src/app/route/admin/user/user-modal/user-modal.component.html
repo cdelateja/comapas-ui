@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{'Components.Structure.User.UserModal.title' | translate}}</h5>
+        <h2 class="modal-title">{{PREFIX + '.title' | translate}}</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,15 +11,15 @@
         <form [formGroup]="formGroup" [attr.id]="formId">
           <div class="form-row">
             <div class="col-md">
-              <ct-textfield [label]="'Components.Structure.User.UserModal.id'"
+              <ct-textfield [label]="PREFIX+'.id'"
                             [formControlName]="'id'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.User.UserModal.userName'"
+              <ct-textfield [label]="PREFIX+'.userName'"
                             [formControlName]="'username'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.User.UserModal.password'"
+              <ct-textfield [label]="PREFIX+'.password'"
                             [formControlName]="'password'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.User.UserModal.email'"
+              <ct-textfield [label]="PREFIX+'.email'"
                             [formControlName]="'email'"></ct-textfield>
-              <ct-combo-box [label]="'Components.Structure.User.UserModal.role'"
+              <ct-combo-box [label]="PREFIX+'.role'"
                             [eqVal]="'idRole'"
                             [values]="roles"
                             [itemCaption]="'name'"

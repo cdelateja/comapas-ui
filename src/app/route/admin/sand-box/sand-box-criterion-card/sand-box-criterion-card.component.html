@@ -1,0 +1,35 @@
+<div class="card criterion-card mb-2">
+  <div class="card-header">
+    <div class="float-right">
+      <button type="button" class="btn btn-outline-danger" (click)="remove()">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </div>
+    <h1 class="card-title">
+      {{criterion.name}}
+    </h1>
+  </div>
+
+  <div class="card-body">
+    <form class="k-form form-group" [formGroup]="formGroup" [attr.id]="formId">
+      <div cdkDropList (cdkDropListDropped)="drop($event)">
+
+        <div class="row" *ngFor="let field of fields" cdkDrag>
+          <div class="col-12">
+            <fa-icon [icon]="faGripHorizontal" cdkDragHandle></fa-icon>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <ng-container
+              appDynamicField
+              [field]="field"
+              [group]="formGroup">
+            </ng-container>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+</div>
+

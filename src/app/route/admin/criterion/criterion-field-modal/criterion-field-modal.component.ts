@@ -14,6 +14,8 @@ declare var $: any;
 })
 export class CriterionFieldModalComponent implements OnInit, OnDestroy {
 
+  public PREFIX = 'Components.Structure.Criterion.FieldModal';
+
   @Input()
   public refresh: EventEmitter<Field> = new EventEmitter();
 
@@ -75,12 +77,12 @@ export class CriterionFieldModalComponent implements OnInit, OnDestroy {
 
 
   public close(): void {
-    $('#criterionFieldModal').modal('hide');
+    $('#FieldModal').modal('hide');
     this.removeSelectedFields(this.criterion);
   }
 
   private toggle(): void {
-    $('#criterionFieldModal').modal({
+    $('#FieldModal').modal({
       keyboard: false,
       backdrop: 'static'
     });

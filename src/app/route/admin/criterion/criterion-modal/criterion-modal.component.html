@@ -1,8 +1,8 @@
-<div class="modal fade" id="criterionModal">
+<div class="modal fade" id="CriterionModal">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{'Components.Structure.Criterion.CriterionModal.title' | translate}}</h5>
+        <h2 class="modal-title">{{PREFIX + '.title' | translate}}</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -12,9 +12,9 @@
           <div class="form-row">
             <div class="col-md">
               <ct-textfield class="d-none"
-                            [label]="'Components.Structure.Criterion.CriterionModal.idCriterion'"
+                            [label]="PREFIX+'.idCriterion'"
                             [formControlName]="'idCriterion'"></ct-textfield>
-              <ct-textfield [label]="'Components.Structure.Criterion.CriterionModal.name'"
+              <ct-textfield [label]="PREFIX+'.name'"
                             [formControlName]="'name'"></ct-textfield>
             </div>
           </div>

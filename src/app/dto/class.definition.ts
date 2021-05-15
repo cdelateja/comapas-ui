@@ -1,6 +1,6 @@
 import {FieldConfig} from 'cdelateja';
 
-export class CampoConfig implements FieldConfig {
+export class DynamicField implements FieldConfig {
   public label: string;
   public placeHolder: string;
   public formControlName: string;
@@ -10,13 +10,10 @@ export class CampoConfig implements FieldConfig {
   public value: any;
   public itemCaption: string;
   public eqVal: string;
-  public catAuxiliar: string;
-  public catalogo: string;
-  public porInstrumento = false;
-  public orden: number = null;
-  public campoReferencia: string;
-  public campoEditable: CampoConfig;
-  public campoRequerido: CampoConfig;
+  public catalog: string;
+  public score = 0;
+  public required = false;
+  public evidence = false;
 }
 
 
@@ -97,5 +94,9 @@ export class CriterionFieldReq {
 }
 
 export class SelectField extends Field {
+  public select = false;
+}
+
+export class SelectCriterion extends Criterion {
   public select = false;
 }

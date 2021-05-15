@@ -22,6 +22,8 @@ declare var $: any;
 })
 export class UserModalComponent extends AbstractValidator implements OnInit {
 
+  public PREFIX = 'Components.Structure.User.Modal';
+
   @Input()
   public refresh: EventEmitter<User> = new EventEmitter();
 

@@ -7,7 +7,7 @@
 
           <div class="row">
             <div class="col-12">
-              <h4>{{'Components.Structure.Criterion.title' | translate}}</h4>
+              <h1>{{PREFIX+'.title' | translate}}</h1>
 
               <div class="float-right">
                 <button type="button" class="btn btn-primary" (click)="addCriterion()">
@@ -23,9 +23,9 @@
             <div class="col-md-3" *ngFor="let criterion of criterionList; let i = index">
               <div class="card criterion-card">
                 <div class="card-header">
-                  <h5 class="card-title">
+                  <h2 class="card-title">
                     {{criterion.name}}
-                  </h5>
+                  </h2>
                 </div>
 
                 <ul class="list-group list-group-flush">
@@ -43,7 +43,7 @@
                     {{'Core.btnEdit' | translate}}
                   </button>
                   <button type="button" class="btn btn-primary" (click)="addFields(criterion)">
-                    {{'Components.Structure.Criterion.fields' | translate}}
+                    {{PREFIX+'.fields' | translate}}
                   </button>
                 </div>
               </div>

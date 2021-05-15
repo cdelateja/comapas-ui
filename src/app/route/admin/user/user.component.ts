@@ -16,6 +16,8 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class UserComponent implements OnInit, OnDestroy {
 
+  public PREFIX = 'Components.Structure.User';
+
   public faPencilAlt = faPencilAlt;
   public faCheck = faCheck;
   public faTimesCircle = faTimesCircle;

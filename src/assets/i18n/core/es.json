@@ -24,7 +24,7 @@
         "attention": "Atencion",
         "activate": "Se va a activar el usuario ¿Desea continuar?",
         "deactivate": "Se va a desactivar el usuario. ¿Desea continuar?",
-        "UserModal": {
+        "Modal": {
           "title": "Datos del usuario",
           "id": "ID",
           "userName": "Nombre de usuario",
@@ -46,7 +46,7 @@
         "catalog": "Catalogo",
         "evidence": "Evidencia",
         "required": "Requerido",
-        "FieldModal": {
+        "Modal": {
           "title": "Datos de la pregunta",
           "idField": "ID",
           "label": "Pregunta",
@@ -62,12 +62,12 @@
       "Criterion": {
         "title": "Gestión de criterios",
         "fields": "Campos",
-        "CriterionModal": {
+        "Modal": {
           "title": "Datos del criterio",
           "idCriterion": "ID",
           "name": "Nombre"
         },
-        "CriterionFieldModal": {
+        "FieldModal": {
           "title": "Criterio: ",
           "idCriterion": "ID",
           "name": "Nombre",
@@ -82,8 +82,11 @@
       },
       "SandBox": {
         "title": "Organiza tu formulario",
-        "SandBoxCriterionModal": {
-
+        "CriterionModal": {
+          "title": "Criterios disponibles",
+          "name": "Nombre",
+          "count": "# Preguntas",
+          "searchPlaceHolder": "Busca por el nombre del criterio"
         }
       }
     }

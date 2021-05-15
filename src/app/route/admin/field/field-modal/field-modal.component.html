@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{'Components.Structure.Field.FieldModal.title' | translate}}</h5>
+        <h2 class="modal-title">{{PREFIX + '.title' | translate}}</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,15 +11,15 @@
         <form [formGroup]="formGroup" [attr.id]="formId">
           <div class="form-row">
             <div class="col-md-12 d-none">
-              <ct-textfield [label]="'Components.Structure.Field.FieldModal.idField'"
+              <ct-textfield [label]="PREFIX+'.idField'"
                             [formControlName]="'idField'"></ct-textfield>
             </div>
             <div class="col-md-6 col-sm-12">
-              <ct-textfield [label]="'Components.Structure.Field.FieldModal.label'"
+              <ct-textfield [label]="PREFIX+'.label'"
                             [formControlName]="'label'"></ct-textfield>
             </div>
             <div class="col-md-6 col-sm-12">
-              <ct-combo-box [label]="'Components.Structure.Field.FieldModal.type'"
+              <ct-combo-box [label]="PREFIX+'.type'"
                             [values]="types"
                             [formControlName]="'type'"></ct-combo-box>
             </div>
@@ -31,17 +31,17 @@
           </div>
           <div class="form-row">
             <div class="col-md-4 col-sm-12">
-              <ct-textfield [label]="'Components.Structure.Field.FieldModal.score'"
+              <ct-textfield [label]="PREFIX+'.score'"
                             [formControlName]="'score'"></ct-textfield>
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-2 col-sm-12">
-              <ct-switch [label]="'Components.Structure.Field.FieldModal.evidence'"
+              <ct-switch [label]="PREFIX+'.evidence'"
                          [formControlName]="'evidence'"></ct-switch>
             </div>
             <div class="col-md-2 col-sm-12">
-              <ct-switch [label]="'Components.Structure.Field.FieldModal.required'"
+              <ct-switch [label]="PREFIX+'.required'"
                          [formControlName]="'required'"></ct-switch>
             </div>
           </div>

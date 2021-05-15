@@ -21,6 +21,8 @@ declare var $: any;
 })
 export class FieldModalComponent extends AbstractValidator implements OnInit {
 
+  public PREFIX = 'Components.Structure.Field.Modal';
+
   @Input()
   public refresh: EventEmitter<Field> = new EventEmitter();
 
@@ -81,6 +83,7 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
   public save(): void {
     if (this.validateForm()) {
       const req: FieldReq = this.formGroup.getRawValue();
+      console.log(req)
       req.catalog = req.catalog === null ? [] : req.catalog;
       this.subscriptions.push(
         this.fieldService.saveField(req).subscribe((response: Response) => {

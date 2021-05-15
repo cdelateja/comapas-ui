@@ -13,6 +13,8 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 })
 export class FieldComponent implements OnInit, OnDestroy {
 
+  public PREFIX = 'Components.Structure.Field';
+
   public faPencilAlt = faPencilAlt;
   public faCheck = faCheck;
   private subscriptions: Subscription[] = [];
