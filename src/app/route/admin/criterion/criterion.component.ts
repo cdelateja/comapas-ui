@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {Criterion, CriterionField, Field, SelectField} from "../../../dto/class.definition";
+import {Criterion, CriterionField, Field} from "../../../dto/class.definition";
 import {ClientService, Response} from "cdelateja";
 import {CriterionService} from "../../../services/criterion.service";
 import {Subscription} from "rxjs";
@@ -17,8 +17,7 @@ export class CriterionComponent implements OnInit, OnDestroy {
   public criterionList: Criterion[] = [];
   public criterionListCache: Criterion[] = [];
   private subscriptions: Subscription[] = [];
-  public fields: SelectField[] = [];
-  public fieldsCache: SelectField[] = [];
+  public fields: Field[] = [];
   public open: EventEmitter<Criterion> = new EventEmitter();
   public openCriField: EventEmitter<Criterion> = new EventEmitter();
   public refresh: EventEmitter<Criterion> = new EventEmitter();
@@ -60,17 +59,15 @@ export class CriterionComponent implements OnInit, OnDestroy {
     );
   }
 
-  private removeSelectedFields(fields: SelectField[]) {
+  private removeSelectedFields(fields: Field[]) {
     this.criterionList.forEach((criterion: Criterion) =>{
       criterion.fields.forEach((criterionField: CriterionField) =>{
-        fields.forEach((value: SelectField, index: number) => {
+        fields.forEach((value: Field, index: number) => {
           if (value.idField == criterionField.field.idField) fields.splice(index, 1);
         });
       });
     });
-
     this.fields = fields;
-    this.fieldsCache = fields;
   }
 
   public addCriterion() {

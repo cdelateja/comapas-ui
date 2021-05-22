@@ -43,7 +43,9 @@
           </table>
         </div>
         <div class="modal-footer">
-          <ct-button [label]="'Core.btnCancel'" [type]="buttonType.DANGER" (click)="close()"></ct-button>
+          <ct-button [type]="buttonType.DANGER" (click)="close()">
+            {{'Core.btnCancel' | translate}}
+          </ct-button>
         </div>
       </div>
     </div>

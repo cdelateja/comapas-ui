@@ -1,4 +1,4 @@
-import {FieldConfig} from 'cdelateja';
+import {Equals, FieldConfig, ifEquals} from 'cdelateja';
 
 export class DynamicField implements FieldConfig {
   public label: string;
@@ -14,6 +14,7 @@ export class DynamicField implements FieldConfig {
   public score = 0;
   public required = false;
   public evidence = false;
+  public idField: number = null;
 }
 
 
@@ -26,6 +27,7 @@ export class User {
   public ip = '';
   public active = true;
   public idRole: number;
+  public admin = false;
 }
 
 export class UserReq {
@@ -35,20 +37,25 @@ export class UserReq {
   public email = '';
   public role: Role = null;
   public idRole: number;
+  public idCompany: number;
 }
 
 export class IdReq {
   public id: number;
 }
 
-export class Role {
+export class Role extends Equals {
   public idRole: number = 0;
   public name = '';
   public codeName = '';
   public active: Boolean;
+
+  equals(o2: any): boolean {
+    return ifEquals('idRole', this, o2);
+  }
 }
 
-export class Field {
+export class Field extends Equals {
   public idField: number = null;
   public name = '';
   public label = '';
@@ -57,9 +64,13 @@ export class Field {
   public evidence = false;
   public required = false;
   public score = 0;
+
+  equals(o2: any): boolean {
+    return ifEquals('idField', this, o2);
+  }
 }
 
-export class FieldReq {
+export class FieldReq extends Equals {
   public idField: number = null;
   public name = '';
   public label = '';
@@ -68,6 +79,10 @@ export class FieldReq {
   public evidence = false;
   public required = false;
   public score = 0;
+
+  equals(o2: any): boolean {
+    return ifEquals('idField', this, o2);
+  }
 }
 
 export class Criterion {
@@ -93,10 +108,39 @@ export class CriterionFieldReq {
   public fields: number[] = [];
 }
 
-export class SelectField extends Field {
-  public select = false;
+export class CriterionConfig extends Criterion {
+  public dynamicFields: DynamicField[] = [];
 }
 
-export class SelectCriterion extends Criterion {
-  public select = false;
+export class FormConfig {
+  public idCriterion: number = null;
+  public fields: FormFieldConfig[] = [];
+}
+
+export class FormFieldConfig {
+  public idField: number = null;
+}
+
+export class ConfigReq {
+  public idFormConfig: number = null;
+  public name = '';
+  public json = '';
+}
+
+export class Config {
+  public idFormConfig: number = null;
+  public name = '';
+  public json: FormConfig[] = [];
+}
+
+export class Company {
+  public idCompany: number = null;
+  public name = '';
+  public users: User[] = [];
+}
+
+export class CompanyReq {
+  public idCompany: number = null;
+  public name = '';
+  public email = '';
 }

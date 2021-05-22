@@ -11,39 +11,90 @@
 
         <div class="form-group">
           <ct-textfield [placeHolder]="'Components.Structure.Field.searchPlaceHolder'" #search
-                        (keyup)="searchByName(search.value)"></ct-textfield>
+                        (keyup)="searchByWord(search.control.value)"></ct-textfield>
         </div>
 
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th></th>
-              <th>{{PREFIX + '.label' | translate}}</th>
-              <th>{{PREFIX + '.name' | translate}}</th>
-              <th>{{PREFIX + '.score' | translate}}</th>
-              <th>{{PREFIX + '.evidence' | translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let field of fields; let i = index">
-              <td>
-                <ct-check-box [(ngModel)]="field.select"></ct-check-box>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
               </td>
-              <td>{{field.label}}</td>
-              <td>{{field.name}}</td>
-              <td>{{field.score}}</td>
-              <td class="text-success">
-                <fa-icon *ngIf="field.evidence" [icon]="faCheck"></fa-icon>
+            </ng-container>
+
+            <ng-container matColumnDef="label">
+              <th mat-header-cell *matHeaderCellDef>
+                {{PREFIX + '.label' | translate}}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{element.label}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>
+                {{PREFIX + '.name' | translate}}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{element.name}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef>
+                {{PREFIX + '.score' | translate}}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{element.score}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="evidence">
+              <th mat-header-cell *matHeaderCellDef>
+                {{PREFIX + '.evidence' | translate}}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{element.evidence}}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)">
+            </tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                {{'Components.Table.noData' | translate}}"{{search.control.value}}"
               </td>
             </tr>
-            </tbody>
           </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
+
         <div class="modal-footer">
-          <ct-button [label]="'Core.btnCancel'" [type]="buttonType.DANGER" (click)="close()"></ct-button>
-          <ct-button [label]="'Core.btnSave'" [type]="buttonType.PRIMARY" (click)="save()"></ct-button>
+          <ct-button [type]="buttonType.DANGER" (click)="close()">
+            {{'Core.btnCancel' | translate}}
+          </ct-button>
+          <ct-button [type]="buttonType.PRIMARY" (click)="save()">
+            {{'Core.btnSave' | translate}}
+          </ct-button>
         </div>
+
       </div>
     </div>
   </div>

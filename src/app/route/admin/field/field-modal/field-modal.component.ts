@@ -83,8 +83,7 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
   public save(): void {
     if (this.validateForm()) {
       const req: FieldReq = this.formGroup.getRawValue();
-      console.log(req)
-      req.catalog = req.catalog === null ? [] : req.catalog;
+      req.catalog = (req.catalog === null || req.catalog === '' )? [] : req.catalog;
       this.subscriptions.push(
         this.fieldService.saveField(req).subscribe((response: Response) => {
           if (ClientService.validateData(response)) {

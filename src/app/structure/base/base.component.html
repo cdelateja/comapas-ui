@@ -20,6 +20,13 @@
                     [icon]="faToolbox"
                     [routerLink]="'/comapas/admin/sandBox'"></ct-navbar-item>
   </ct-navbar-dropdown>
+  <ct-navbar-dropdown [label]="'Menu.Home.home'"
+                      [icon]="faHome">
+    <ct-navbar-item [label]="'Menu.Home.institute'"
+                    [appAuthorized]="'adminUsers'"
+                    [icon]="faSchool"
+                    [routerLink]="'/comapas/home/institute'"></ct-navbar-item>
+  </ct-navbar-dropdown>
   <ct-navbar-body>
     <router-outlet></router-outlet>
   </ct-navbar-body>

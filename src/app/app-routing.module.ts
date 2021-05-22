@@ -8,6 +8,7 @@ import {AdminComponent} from "./route/admin/admin.component";
 import {FieldComponent} from "./route/admin/field/field.component";
 import {CriterionComponent} from "./route/admin/criterion/criterion.component";
 import {SandBoxComponent} from "./route/admin/sand-box/sand-box.component";
+import {InstituteComponent} from "./route/home/institute/institute.component";
 
 const routes: Routes = [
   {path: 'login', component: HomeLoginComponent,},
@@ -16,28 +17,28 @@ const routes: Routes = [
     component: BaseComponent,
     children: [
       {
-        path: 'inicio', component: HomeComponent
-      },
-      {
         path: 'admin',
         component: AdminComponent,
-        children: [
-          {
-            path: 'user', component: UserComponent
-          },
-          {
-            path: 'field', component: FieldComponent
-          },
-          {
-            path: 'criterion', component: CriterionComponent
-          },
-          {
-            path: 'sandBox', component: SandBoxComponent
-          },
-          {path: '**', pathMatch: 'full', redirectTo: '/comapas/inicio'},
+        children: [{
+          path: 'user', component: UserComponent
+        }, {
+          path: 'field', component: FieldComponent
+        }, {
+          path: 'criterion', component: CriterionComponent
+        }, {
+          path: 'sandBox', component: SandBoxComponent
+        },
+          {path: '**', pathMatch: 'full', redirectTo: '/comapas/home'},
         ]
       },
-      {path: '**', pathMatch: 'full', redirectTo: '/comapas/inicio'},
+      {
+        path: 'home',
+        component: HomeComponent,
+        children: [{
+          path: 'institute', component: InstituteComponent
+        }]
+      },
+      {path: '**', pathMatch: 'full', redirectTo: '/comapas/home'},
     ]
   },
   {path: '**', pathMatch: 'full', redirectTo: '/login'},

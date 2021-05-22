@@ -39,6 +39,16 @@ import {
 } from "./common/components/wrapper";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
+import {CustomMatPaginatorIntl} from "./common/custom/custom.mat.paginator";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { InstituteComponent } from './route/home/institute/institute.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { InstituteTableComponent } from './route/home/institute/institute-table/institute-table.component';
+import { InstituteModalComponent } from './route/home/institute/institute-modal/institute-modal.component';
+import { InstituteDetailComponent } from './route/home/institute/institute-detail/institute-detail.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +78,11 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     DynamicCheckBoxComponent,
     DynamicNumberFieldComponent,
     DynamicComboBoxComponent,
-    DynamicRadioButtonComponent
+    DynamicRadioButtonComponent,
+    InstituteComponent,
+    InstituteTableComponent,
+    InstituteModalComponent,
+    InstituteDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +94,11 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     DragDropModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTabsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -92,7 +111,11 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     provide: HTTP_INTERCEPTORS,
     useClass: LoaderInterceptorService,
     multi: true
-  }],
+  },
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomMatPaginatorIntl
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

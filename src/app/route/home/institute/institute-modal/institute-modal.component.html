@@ -1,4 +1,4 @@
-<div class="modal fade" id="userModal">
+<div class="modal fade" id="instituteModal">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,19 +11,12 @@
         <form [formGroup]="formGroup" [attr.id]="formId">
           <div class="form-row">
             <div class="col-md">
-              <ct-textfield [label]="PREFIX+'.id'"
-                            [formControlName]="'id'"></ct-textfield>
-              <ct-textfield [label]="PREFIX+'.userName'"
-                            [formControlName]="'username'"></ct-textfield>
-              <ct-textfield [label]="PREFIX+'.password'"
-                            [formControlName]="'password'"></ct-textfield>
+              <ct-textfield class="d-none" [label]="PREFIX+'.idCompany'"
+                            [formControlName]="'idCompany'"></ct-textfield>
+              <ct-textfield [label]="PREFIX+'.name'"
+                            [formControlName]="'name'"></ct-textfield>
               <ct-textfield [label]="PREFIX+'.email'"
                             [formControlName]="'email'"></ct-textfield>
-              <ct-combo-box [label]="PREFIX+'.role'"
-                            [eqVal]="'idRole'"
-                            [values]="roles"
-                            [itemCaption]="'name'"
-                            [formControlName]="'role'"></ct-combo-box>
             </div>
           </div>
         </form>

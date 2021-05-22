@@ -18,6 +18,14 @@ body {
   color: #495057;
 }
 
+.cdk-overlay-container {
+  z-index: 1051 !important;
+}
+
+table {
+  width: 100%;
+}
+
 .comapas {
   @import "assets/styles/login";
   @import "assets/styles/inputs";

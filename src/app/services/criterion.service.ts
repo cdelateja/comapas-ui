@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ConfigService, OauthService} from "../../../../angular-lib/dist/cdelateja";
+import {ConfigService, OauthService} from "cdelateja";
 import {Observable} from "rxjs";
 import {CriterionFieldReq, CriterionReq} from "../dto/class.definition";
 

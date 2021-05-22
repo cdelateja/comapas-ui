@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {AbstractValidator, ClientService, FormValidator, NotEmpty, NotNull, Response} from "cdelateja";
 import {TranslateService} from "@ngx-translate/core";
 import {UserService} from "../../../../services/user.service";
-import {Role, User, UserReq} from "../../../../dto/class.definition";
+import {Company, Role, User, UserReq} from "../../../../dto/class.definition";
 import {RoleService} from "../../../../services/role.service";
 
 declare var $: any;
@@ -15,7 +15,7 @@ declare var $: any;
 @FormValidator({
   formId: '',
   validators: [
-    NotEmpty.generate(['username', 'password', 'email']),
+    NotEmpty.generate(['username', 'email', 'password']),
     NotNull.generate(['role'])
   ],
   object: new UserReq()
@@ -23,6 +23,9 @@ declare var $: any;
 export class UserModalComponent extends AbstractValidator implements OnInit {
 
   public PREFIX = 'Components.Structure.User.Modal';
+
+  @Input()
+  public company: Company;
 
   @Input()
   public refresh: EventEmitter<User> = new EventEmitter();
@@ -47,7 +50,11 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
     this.subscriptions.push(
       this.roleService.findAll().subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.roles = response.result
+          response.result.forEach(e => {
+            const role = new Role();
+            Object.assign(role, e);
+            this.roles.push(role);
+          });
         }
       })
     );
@@ -83,6 +90,7 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
     if (this.validateForm()) {
       const userReq: UserReq = this.formGroup.getRawValue();
       userReq.idRole = userReq.role.idRole;
+      userReq.idCompany = this.company.idCompany;
       this.subscriptions.push(
         this.userService.save(userReq).subscribe((response: Response) => {
           if (ClientService.validateData(response)) {

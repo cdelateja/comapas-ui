@@ -1,37 +1,46 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service';
-import {Field, IdReq, Role, User} from '../../../dto/class.definition';
-import {ClientService, ConfirmationDialog, Response} from 'cdelateja';
+import {Company, IdReq, Role, User} from '../../../dto/class.definition';
+import {AbstractComponent, ClientService, ConfirmationDialog, Response} from 'cdelateja';
 import {Subscription} from "rxjs";
 import {faPencilAlt} from "@fortawesome/free-solid-svg-icons/faPencilAlt";
 import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import {RoleService} from "../../../services/role.service";
 import {TranslateService} from "@ngx-translate/core";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {CompanyService} from "../../../services/company.service";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  @ViewChild(MatPaginator)
+  public paginator: MatPaginator;
 
   public PREFIX = 'Components.Structure.User';
 
+  public displayedColumns: string[] = ['id', 'username', 'email', 'ip', 'role', 'active', 'edit'];
   public faPencilAlt = faPencilAlt;
   public faCheck = faCheck;
   public faTimesCircle = faTimesCircle;
   public users: User[] = [];
-  public usersCache: User[] = [];
   private subscriptions: Subscription[] = [];
   public roles: Role[] = [];
   private user: User;
-  public refresh: EventEmitter<Field> = new EventEmitter();
+  public company: Company;
+  public dataSource = new MatTableDataSource<User>(this.users);
+  public refresh: EventEmitter<User> = new EventEmitter();
   public open: EventEmitter<User> = new EventEmitter()
 
   constructor(private userService: UserService,
               private roleService: RoleService,
               protected translate: TranslateService,
+              private companyService: CompanyService,
               private confirmationDialog: ConfirmationDialog) {
     this.subscriptions.push(
       this.roleService.findAll().subscribe((response: Response) => {
@@ -46,7 +55,7 @@ export class UserComponent implements OnInit, OnDestroy {
         req.id = this.user.id;
         this.userService.changeStatus(req).subscribe((response: Response) => {
           if (ClientService.validateData(response)) {
-            this.findUsers();
+            this.refreshUser(response.result);
           }
         });
       })
@@ -54,37 +63,34 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.refresh.subscribe(() => {
-      this.findUsers();
+    this.refresh.subscribe((user: User) => {
+      this.refreshUser(user);
     });
-    this.findUsers();
+    this.findInnerCompany();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  public findUsers() {
-    this.userService.findAll().subscribe((response: Response) => {
-      if (ClientService.validateData(response)) {
-        this.users = response.result
-        this.usersCache = response.result
-      }
-    });
+  public findInnerCompany() {
+    this.subscriptions.push(
+      this.companyService.findInner().subscribe((response: Response) => {
+        if (ClientService.validateData(response)) {
+          this.company = response.result;
+          this.users = this.company.users;
+          this.dataSource.data = this.users;
+        }
+      })
+    );
   }
 
-  public searchByName(word: string) {
-    const listUsers: User[] = [];
-    if ('' !== word) {
-      this.users.forEach(e => {
-        if (e.username.toLowerCase().includes(word.toLowerCase())) {
-          listUsers.push(e);
-        }
-      });
-      this.users = listUsers;
-    } else {
-      this.users = this.usersCache;
-    }
+  public searchByWord(word: string) {
+    this.dataSource.filter = word;
   }
 
   public addUser() {
@@ -93,6 +99,19 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public editUser(user: User) {
     this.open.next(user);
+  }
+
+  public refreshUser(user: User) {
+    const foundUser = this.dataSource.data.find((u: User) => u.id === user.id);
+    if (foundUser) {
+      foundUser.active = user.active;
+      foundUser.username = user.username;
+      foundUser.idRole = user.idRole;
+      foundUser.email = user.email;
+    } else {
+      this.users.push(user);
+      this.dataSource.data = this.users;
+    }
   }
 
   public getRole(idRole: number): string {

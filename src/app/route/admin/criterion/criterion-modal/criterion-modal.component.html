@@ -21,8 +21,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <ct-button [label]="'Core.btnCancel'" [type]="buttonType.DANGER" (click)="close()"></ct-button>
-        <ct-button [label]="'Core.btnSave'" [type]="buttonType.PRIMARY" (click)="save()"></ct-button>
+        <ct-button [type]="ButtonType.DANGER" (click)="close()">
+          {{'Core.btnCancel' | translate}}
+        </ct-button>
+        <ct-button [type]="ButtonType.PRIMARY" (click)="save()">
+          {{'Core.btnSave' | translate}}
+        </ct-button>
       </div>
     </div>
   </div>

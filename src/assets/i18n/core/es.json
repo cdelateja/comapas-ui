@@ -6,9 +6,20 @@
       "field": "Campos",
       "criterion": "Criterios",
       "sandBox": "Caja de arena"
+    },
+    "Home": {
+      "home": "Inicio",
+      "institute": "Instituto",
+      "field": "Campos",
+      "criterion": "Criterios",
+      "sandBox": "Caja de arena"
     }
   },
   "Components": {
+    "Table": {
+      "perPage": "No. elementos por página",
+      "noData": "No se encontraron registro con el filtro: "
+    },
     "Structure": {
       "User": {
         "title": "Gestión de usuarios",
@@ -87,6 +98,25 @@
           "name": "Nombre",
           "count": "# Preguntas",
           "searchPlaceHolder": "Busca por el nombre del criterio"
+        }
+      },
+      "Institute": {
+        "title": "Organiza tu formulario",
+        "subMenuInstitutes": "Ver institutos",
+        "Table": {
+          "title": "Institutos dados de alta",
+          "idCompany": "ID",
+          "name": "Nombre",
+          "admin": "Usuario administrador",
+          "test": "Cuestionario",
+          "searchPlaceHolder": "Busca por el nombre del criterio"
+        },
+        "Modal": {
+          "title": "Datos del instituto",
+          "idCompany": "ID",
+          "name": "Nombre",
+          "email": "Correo",
+          "admin": "Usuario administrador"
         }
       }
     }
