@@ -14,6 +14,7 @@ import {CriterionService} from "../../../services/criterion.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {faGripHorizontal} from "@fortawesome/free-solid-svg-icons/faGripHorizontal";
 import {ConfigurationService} from "../../../services/configuration.service";
+import {toConfig} from "../../../common/functions/functions";
 
 @Component({
   selector: 'app-sand-box',
@@ -52,7 +53,7 @@ export class SandBoxComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.configurationService.findByName('FORM').subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.config = this.toConfig(response.result);
+          this.config = toConfig(response.result);
         }
         this.findAll();
       })
@@ -128,18 +129,10 @@ export class SandBoxComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.configurationService.save(req).subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.config = this.toConfig(response.result);
+          this.config = toConfig(response.result);
         }
       })
     );
-  }
-
-  private toConfig(req: ConfigReq): Config {
-    const config: Config = new Config();
-    config.idFormConfig = req.idFormConfig;
-    config.name = req.name;
-    config.json = JSON.parse(req.json);
-    return config;
   }
 
 }

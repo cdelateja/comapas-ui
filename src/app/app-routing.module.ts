@@ -9,6 +9,7 @@ import {FieldComponent} from "./route/admin/field/field.component";
 import {CriterionComponent} from "./route/admin/criterion/criterion.component";
 import {SandBoxComponent} from "./route/admin/sand-box/sand-box.component";
 import {InstituteComponent} from "./route/home/institute/institute.component";
+import {InstituteTestComponent} from "./route/home/institute/institute-test/institute-test.component";
 
 const routes: Routes = [
   {path: 'login', component: HomeLoginComponent,},
@@ -36,6 +37,8 @@ const routes: Routes = [
         component: HomeComponent,
         children: [{
           path: 'institute', component: InstituteComponent
+        }, {
+          path: 'institute/test/:id', component: InstituteTestComponent
         }]
       },
       {path: '**', pathMatch: 'full', redirectTo: '/comapas/home'},

@@ -44,11 +44,22 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 import {CustomMatPaginatorIntl} from "./common/custom/custom.mat.paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { InstituteComponent } from './route/home/institute/institute.component';
+import {InstituteComponent} from './route/home/institute/institute.component';
 import {MatTabsModule} from "@angular/material/tabs";
-import { InstituteTableComponent } from './route/home/institute/institute-table/institute-table.component';
-import { InstituteModalComponent } from './route/home/institute/institute-modal/institute-modal.component';
-import { InstituteDetailComponent } from './route/home/institute/institute-detail/institute-detail.component';
+import {InstituteTableComponent} from './route/home/institute/institute-table/institute-table.component';
+import {InstituteModalComponent} from './route/home/institute/institute-modal/institute-modal.component';
+import {InstituteDetailComponent} from './route/home/institute/institute-detail/institute-detail.component';
+import {InstituteTestComponent} from './route/home/institute/institute-test/institute-test.component';
+import {InstituteCriterionCardComponent} from './route/home/institute/institute-test/institute-criterion-card/institute-criterion-card.component';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {UploadComponent} from './common/components/upload/upload.component';
+import {ViewFileComponent} from './common/components/view-file/view-file.component';
+import {SafeUrlPipe} from './pipes/safe-url.pipe';
+import {PdfViewerModule} from "ng2-pdf-viewer";
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import {InstituteChartComponent} from './route/home/institute/institute-chart/institute-chart.component';
+import {InstituteChartCardComponent} from './route/home/institute/institute-chart/institute-chart-card/institute-chart-card.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -82,7 +93,14 @@ import { InstituteDetailComponent } from './route/home/institute/institute-detai
     InstituteComponent,
     InstituteTableComponent,
     InstituteModalComponent,
-    InstituteDetailComponent
+    InstituteDetailComponent,
+    InstituteTestComponent,
+    InstituteCriterionCardComponent,
+    UploadComponent,
+    ViewFileComponent,
+    SafeUrlPipe,
+    InstituteChartComponent,
+    InstituteChartCardComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +110,7 @@ import { InstituteDetailComponent } from './route/home/institute/institute-detai
     FontAwesomeModule,
     CTModule,
     ReactiveFormsModule,
+    PdfViewerModule,
     BrowserAnimationsModule,
     DragDropModule,
     MatSortModule,
@@ -99,6 +118,7 @@ import { InstituteDetailComponent } from './route/home/institute/institute-detai
     MatTableModule,
     MatPaginatorModule,
     MatTabsModule,
+    MatProgressBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -106,6 +126,7 @@ import { InstituteDetailComponent } from './route/home/institute/institute-detai
         deps: [HttpClient]
       }
     }),
+    NgxExtendedPdfViewerModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -115,7 +136,9 @@ import { InstituteDetailComponent } from './route/home/institute/institute-detai
     {
       provide: MatPaginatorIntl,
       useClass: CustomMatPaginatorIntl
-    }],
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

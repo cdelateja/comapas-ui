@@ -1,0 +1,41 @@
+<div class="container-lg container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h1>{{PREFIX + '.title' | translate}}</h1>
+            </div>
+          </div>
+
+          <div class="row" *ngFor="let criterion of criterionList; let i = index" cdkDrag>
+            <div class="col">
+              <app-institute-criterion-card [criterion]="criterion"
+                                            [config]="config"
+                                            [institute]="institute"></app-institute-criterion-card>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-md-12">
+
+              <div class="float-right">
+                <button type="button" class="btn btn-secondary mr-2" (click)="save()">
+                  {{'Core.btnSave' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="complete()">
+                  {{'Components.Common.Button.complete' | translate}}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-view-file></app-view-file>

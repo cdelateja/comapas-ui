@@ -1,13 +1,14 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {faPencilAlt} from '@fortawesome/free-solid-svg-icons/faPencilAlt';
 import {MatTableDataSource} from "@angular/material/table";
-import {Company, User} from "../../../../dto/class.definition";
+import {Company, CompanyRes, CompanyUserRes, User} from "../../../../dto/class.definition";
 import {CompanyService} from "../../../../services/company.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {Subscription} from "rxjs";
 import {ClientService, Response} from "cdelateja";
 import {ObservableService} from "../../../../services/observable.service";
 import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-institute-table',
@@ -24,17 +25,18 @@ export class InstituteTableComponent implements OnInit, OnDestroy, AfterViewInit
   public displayedColumns: string[] = ['idCompany', 'name', 'admin', 'test', 'edit'];
   public faPencilAlt = faPencilAlt;
   public faFileAlt = faFileAlt;
-  public institutes: Company[] = [];
-  public dataSource = new MatTableDataSource<Company>(this.institutes);
+  public institutes: CompanyRes[] = [];
+  public dataSource = new MatTableDataSource<CompanyRes>(this.institutes);
   private subscriptions: Subscription[] = [];
 
   constructor(private companyService: CompanyService,
-              private observableService: ObservableService) {
+              private observableService: ObservableService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.findInstitutes();
-    this.observableService.obsRefreshCompany().subscribe((company: Company) => {
+    this.observableService.obsRefreshCompany().subscribe((company: CompanyRes) => {
       this.refreshCompany(company);
     });
   }
@@ -58,7 +60,7 @@ export class InstituteTableComponent implements OnInit, OnDestroy, AfterViewInit
     );
   }
 
-  public refreshCompany(company: Company) {
+  public refreshCompany(company: CompanyRes) {
     const found = this.dataSource.data.find((c: Company) => c.idCompany === company.idCompany);
     if (found) {
       found.name = company.name;
@@ -72,8 +74,8 @@ export class InstituteTableComponent implements OnInit, OnDestroy, AfterViewInit
     this.observableService.nextOpenModalCompany(new Company());
   }
 
-  public getAdminUser(company: Company): string {
-    const user: User = company.users.find((u: User) => u.admin);
+  public getAdminUser(company: CompanyRes): string {
+    const user: CompanyUserRes = company.users.find((u: CompanyUserRes) => u.admin);
     if (user) {
       return user.username
     }
@@ -82,6 +84,10 @@ export class InstituteTableComponent implements OnInit, OnDestroy, AfterViewInit
 
   public searchByWord(word: string) {
     this.dataSource.filter = word;
+  }
+
+  public viewTest(company: Company){
+    this.router.navigate(['/institute/test', company.idCompany]).then();
   }
 
 }

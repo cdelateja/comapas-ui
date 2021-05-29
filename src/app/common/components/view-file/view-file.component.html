@@ -1,0 +1,25 @@
+<div class="modal fade" id="viewFileModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">{{PREFIX + '.title' | translate}}</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-image">
+          <img [src]="blobData | safeUrl" *ngIf="file.contentType === 'image/png'" alt="image"/>
+          <ngx-extended-pdf-viewer [src]="blobData"
+                                   *ngIf="file.contentType === 'application/pdf'">
+          </ngx-extended-pdf-viewer>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <ct-button [type]="ButtonType.DANGER" (click)="close()">
+          {{'Core.btnCancel' | translate}}
+        </ct-button>
+      </div>
+    </div>
+  </div>
+</div>

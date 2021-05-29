@@ -1,41 +1,41 @@
 import {Injectable} from '@angular/core';
-import {ClientService, ConfigService} from "cdelateja";
+import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from "rxjs";
-import {CriterionFieldReq, CriterionReq} from "../dto/class.definition";
+import {TestReq} from "../dto/class.definition";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CriterionService {
+export class InstituteService {
 
   private readonly URL: string;
 
   constructor(private clientService: ClientService,
               private configService: ConfigService) {
-    this.URL = configService.get('servers.comapasWs.url') + '/criterion';
+    this.URL = configService.get('servers.comapasWs.url') + '/institute';
   }
 
-  public findAll(): Observable<any> {
+  public find(idInstitute: number): Observable<any> {
     return this.clientService
       .create()
       .withToken()
-      .get(this.URL + '/findAll')
+      .get(this.URL + '/find?idInstitute=' + idInstitute)
       .execute();
   }
 
-  public saveCriterion(req: CriterionReq): Observable<any> {
+  public saveTest(req: TestReq): Observable<any> {
     return this.clientService
       .create()
       .withToken()
-      .post(this.URL + '/save', req)
+      .post(this.URL + '/test', req)
       .execute();
   }
 
-  public addFields(req: CriterionFieldReq): Observable<any> {
+  public getFieldsInfo(): Observable<any> {
     return this.clientService
       .create()
       .withToken()
-      .post(this.URL + '/addFields', req)
+      .get(this.URL + '/institutesInfo')
       .execute();
   }
 }

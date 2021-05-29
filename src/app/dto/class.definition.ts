@@ -15,6 +15,8 @@ export class DynamicField implements FieldConfig {
   public required = false;
   public evidence = false;
   public idField: number = null;
+  public idCriterion: number = null;
+  public file: FieldFile;
 }
 
 
@@ -64,6 +66,7 @@ export class Field extends Equals {
   public evidence = false;
   public required = false;
   public score = 0;
+  public scoreValue = '';
 
   equals(o2: any): boolean {
     return ifEquals('idField', this, o2);
@@ -79,6 +82,7 @@ export class FieldReq extends Equals {
   public evidence = false;
   public required = false;
   public score = 0;
+  public scoreValue = '';
 
   equals(o2: any): boolean {
     return ifEquals('idField', this, o2);
@@ -136,11 +140,68 @@ export class Config {
 export class Company {
   public idCompany: number = null;
   public name = '';
-  public users: User[] = [];
 }
 
 export class CompanyReq {
   public idCompany: number = null;
   public name = '';
   public email = '';
+}
+
+export class CompanyRes {
+  public idCompany: number = null;
+  public name = '';
+  public users: CompanyUserRes[] = [];
+}
+
+export class CompanyUserRes {
+  public id: number;
+  public username = '';
+  public email = '';
+  public admin = false;
+}
+
+export class TestReq {
+  public idInstitute: number;
+  public criterion: TestCriterionReq[] = [];
+}
+
+export class TestCriterionReq {
+  public fields: TestFieldReq[] = [];
+}
+
+export class TestFieldReq {
+  public name = '';
+  public value = '';
+}
+
+export class Institute {
+  public idInstitute: number;
+  public fields: InstituteField[] = [];
+  public files: FieldFile[] = [];
+}
+
+export class InstituteField {
+  public idInstitute: number;
+  public idField: number;
+  public value: string;
+}
+
+export class FieldFile {
+  public idInstitute: number;
+  public idField: number;
+  public filename: string;
+  public contentType: string;
+  public mbSize: number;
+}
+
+export class FieldsInfoRes {
+  public totalScore: number;
+  public totalFields: number;
+}
+
+export class InstituteInfoRes {
+  public idInstitute: number;
+  public totalScore: number;
+  public totalFields: number;
 }

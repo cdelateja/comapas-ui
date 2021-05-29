@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ConfigService, OauthService} from 'cdelateja';
+import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -9,13 +9,18 @@ export class RoleService {
 
   private readonly URL: string;
 
-  constructor(private oauthService: OauthService,
+  constructor(private clientService: ClientService,
               private configService: ConfigService) {
     this.URL = configService.get('servers.oauth.url') + '/role';
   }
 
   public findAll(): Observable<any> {
-    return this.oauthService.withToken().get(this.URL + '/findAll', {bufferSize: 1});
+    return this.clientService
+      .create()
+      .withToken()
+      .setOptions({bufferSize: 1})
+      .get(this.URL + '/findAll')
+      .execute();
   }
 
 }

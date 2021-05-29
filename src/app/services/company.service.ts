@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ConfigService, OauthService} from "cdelateja";
+import {ClientService, ConfigService} from "cdelateja";
 import {Observable} from "rxjs";
 import {CompanyReq} from "../dto/class.definition";
 
@@ -10,28 +10,63 @@ export class CompanyService {
 
   private readonly URL: string;
 
-  constructor(private oauthService: OauthService,
+  constructor(private clientService: ClientService,
               private configService: ConfigService) {
     this.URL = configService.get('servers.oauth.url') + '/company';
   }
 
   public findAll(): Observable<any> {
-    return this.oauthService.withToken().get(this.URL + '/findAll');
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/findAll').execute();
   }
 
   public findExternals(): Observable<any> {
-    return this.oauthService.withToken().get(this.URL + '/externals');
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/externals')
+      .execute();
   }
 
   public findInner(): Observable<any> {
-    return this.oauthService.withToken().get(this.URL + '/inner', {bufferSize: 1});
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/inner')
+      .execute();
+  }
+
+  public findByUser(): Observable<any> {
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/findByUser')
+      .execute();
   }
 
   public findByName(name: string): Observable<any> {
-    return this.oauthService.withToken().get(this.URL + '/find?name=' + name, {bufferSize: 1});
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/find?name=' + name)
+      .execute();
+  }
+
+  public findById(id: number): Observable<any> {
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/findById?id=' + id)
+      .execute();
   }
 
   public save(req: CompanyReq): Observable<any> {
-    return this.oauthService.withToken().post(this.URL + '/save', req);
+    return this.clientService
+      .create()
+      .withToken()
+      .post(this.URL + '/save', req)
+      .execute();
   }
 }

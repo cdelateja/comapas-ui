@@ -27,6 +27,13 @@
                     [icon]="faSchool"
                     [routerLink]="'/comapas/home/institute'"></ct-navbar-item>
   </ct-navbar-dropdown>
+  <ct-navbar-dropdown [label]="'Menu.Institute.home'"
+                      [icon]="faHome">
+    <ct-navbar-item [label]="'Menu.Institute.test'"
+                    [appAuthorized]="'adminUsers'"
+                    [icon]="faSchool"
+                    [routerLink]="['/comapas/home/institute/test', company.idCompany]"></ct-navbar-item>
+  </ct-navbar-dropdown>
   <ct-navbar-body>
     <router-outlet></router-outlet>
   </ct-navbar-body>

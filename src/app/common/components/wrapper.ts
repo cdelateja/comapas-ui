@@ -35,6 +35,9 @@ export class DynamicLabelComponent extends DynamicFieldComponent implements OnIn
          <ct-textfield [label]="field.label"
                        [formControlName]="field.formControlName"></ct-textfield>
        </div>
+       <div class="col-12 mb-4 row-upload" *ngIf="field.evidence">
+         <app-upload [field]="this.field"></app-upload>
+       </div>
     </span>
   `
 })
@@ -56,6 +59,9 @@ export class DynamicTextFieldComponent extends DynamicFieldComponent implements 
        <div class="col-12">
          <ct-date-picker [label]="field.label"
                          [formControlName]="field.formControlName"></ct-date-picker>
+       </div>
+       <div class="col-12 mb-4 row-upload" *ngIf="field.evidence">
+         <app-upload [field]="this.field"></app-upload>
        </div>
     </span>
   `
@@ -80,6 +86,9 @@ export class DynamicDatePickerComponent extends DynamicFieldComponent implements
                       [label]="field.label"
                       [formControlName]="field.formControlName"></ct-check-box>
       </div>
+      <div class="col-12 mb-4 row-upload" *ngIf="field.evidence">
+        <app-upload [field]="this.field"></app-upload>
+      </div>
     </span>
   `
 })
@@ -103,6 +112,9 @@ export class DynamicCheckBoxComponent extends DynamicFieldComponent implements O
         <ct-number-field [label]="field.label"
                          [formControlName]="field.formControlName"></ct-number-field>
       </div>
+      <div class="col-12 mb-4 row-upload" *ngIf="field.evidence">
+        <app-upload [field]="this.field"></app-upload>
+      </div>
     </span>
   `
 })
@@ -125,6 +137,9 @@ export class DynamicNumberFieldComponent extends DynamicFieldComponent implement
         <ct-combo-box [label]="field.label"
                       [values]="catalog"
                       [formControlName]="field.formControlName"></ct-combo-box>
+      </div>
+      <div class="col-12 mb-4 row-upload" *ngIf="field.evidence">
+        <app-upload [field]="this.field"></app-upload>
       </div>
     </span>
   `
@@ -156,6 +171,9 @@ export class DynamicComboBoxComponent extends DynamicFieldComponent implements O
         <ct-radio-button [label]="field.label"
                          [values]="catalog"
                          [formControlName]="field.formControlName"></ct-radio-button>
+      </div>
+      <div class="col-12 mb-4 row-upload" *ngIf="field.evidence">
+        <app-upload [field]="this.field"></app-upload>
       </div>
     </span>
   `

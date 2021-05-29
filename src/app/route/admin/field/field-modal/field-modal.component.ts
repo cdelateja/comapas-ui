@@ -56,12 +56,14 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
     this.subscriptions.push(
       this.getFieldObservable('type').subscribe((value) => {
         this.disableField('catalog');
-        this.removeValidators(['catalog']);
+        this.removeValidators(['catalog', 'scoreValue']);
         this.setValue('catalog', null);
+        this.setValue('score', 0);
+        this.setValue('scoreValue', '');
         this.hide = true;
         if ('radio' === value || 'select' === value) {
           this.enabledField('catalog');
-          this.addValidators([NotEmpty.generate(['catalog'])])
+          this.addValidators([NotEmpty.generate(['catalog', 'scoreValue'])])
           this.hide = false;
         }
       })
@@ -83,7 +85,7 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
   public save(): void {
     if (this.validateForm()) {
       const req: FieldReq = this.formGroup.getRawValue();
-      req.catalog = (req.catalog === null || req.catalog === '' )? [] : req.catalog;
+      req.catalog = (req.catalog === null || req.catalog === '' ) ? [] : req.catalog;
       this.subscriptions.push(
         this.fieldService.saveField(req).subscribe((response: Response) => {
           if (ClientService.validateData(response)) {

@@ -6,6 +6,10 @@ import {faToolbox} from "@fortawesome/free-solid-svg-icons/faToolbox";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
 import {faSchool} from "@fortawesome/free-solid-svg-icons/faSchool";
+import {Company} from "../../dto/class.definition";
+import {Subscription} from "rxjs";
+import {CompanyService} from "../../services/company.service";
+import {ClientService, Response} from "../../../../../angular-lib/dist/cdelateja";
 
 @Component({
   selector: 'app-base',
@@ -24,9 +28,28 @@ export class BaseComponent implements OnInit {
   public faToolbox = faToolbox;
 
 
-  constructor() { }
+  public company: Company = new Company();
+  private subscriptions: Subscription[] = [];
+
+  constructor(private companyService: CompanyService) {
+  }
 
   ngOnInit(): void {
+    this.findCompany();
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  private findCompany() {
+    this.subscriptions.push(
+      this.companyService.findByUser().subscribe((response: Response) => {
+        if (ClientService.validateData(response)) {
+          this.company = response.result;
+        }
+      })
+    );
   }
 
 }

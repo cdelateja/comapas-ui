@@ -29,6 +29,22 @@ table {
 .comapas {
   @import "assets/styles/login";
   @import "assets/styles/inputs";
+  @import "assets/styles/image";
+
+  @media only screen and (max-width: 768px) {
+    .container-fluid {
+      &.main {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      &.container-lg {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+  }
+
 
   .loading-overlay {
     display: none;

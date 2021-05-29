@@ -1,0 +1,25 @@
+<div class="card criterion-card mb-2">
+  <div class="card-header">
+    <h1 class="card-title">
+      {{criterion.name}}
+    </h1>
+  </div>
+
+  <div class="card-body">
+    <form class="k-form form-group" [formGroup]="formGroup" [attr.id]="formId">
+
+      <div class="row" *ngFor="let field of fields" cdkDrag>
+        <div class="col-md-12 col-sm-12">
+          <ng-container
+            appDynamicField
+            [field]="field"
+            [group]="formGroup">
+          </ng-container>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+

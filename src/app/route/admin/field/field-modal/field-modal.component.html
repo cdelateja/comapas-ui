@@ -29,10 +29,14 @@
               <ct-catalog [formControlName]="'catalog'"></ct-catalog>
             </div>
           </div>
-          <div class="form-row">
+          <div class="form-row" [ngClass]="{'d-none': hide}">
             <div class="col-md-4 col-sm-12">
-              <ct-textfield [label]="PREFIX+'.score'"
-                            [formControlName]="'score'"></ct-textfield>
+              <ct-number-field [label]="PREFIX+'.score'"
+                               [formControlName]="'score'"></ct-number-field>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <ct-textfield [label]="PREFIX+'.scoreValue'"
+                            [formControlName]="'scoreValue'"></ct-textfield>
             </div>
           </div>
           <div class="form-row">

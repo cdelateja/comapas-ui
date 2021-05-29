@@ -82,11 +82,19 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
       this.companyService.findInner().subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
           this.company = response.result;
-          this.users = this.company.users;
-          this.dataSource.data = this.users;
+          this.findUsers(this.company.idCompany);
         }
       })
     );
+  }
+
+  public findUsers(idCompany: number) {
+    this.userService.findByIdCompany(idCompany).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.users = response.result
+        this.dataSource.data = this.users;
+      }
+    });
   }
 
   public searchByWord(word: string) {

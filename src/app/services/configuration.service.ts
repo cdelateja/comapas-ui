@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ConfigService, OauthService} from 'cdelateja';
+import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from 'rxjs';
 import {ConfigReq} from '../dto/class.definition';
 
@@ -10,16 +10,23 @@ export class ConfigurationService {
 
   private readonly URL: string;
 
-  constructor(private oauthService: OauthService,
+  constructor(private clientService: ClientService,
               private configService: ConfigService) {
     this.URL = configService.get('servers.comapasWs.url') + '/config';
   }
 
   public findByName(name: string): Observable<any> {
-    return this.oauthService.withToken().get(this.URL + '/find?name=' + name, {bufferSize: 1});
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/find?name=' + name)
+      .execute();
   }
 
   public save(req: ConfigReq): Observable<any> {
-    return this.oauthService.withToken().post(this.URL + '/save', req);
+    return this.clientService
+      .create()
+      .withToken().post(this.URL + '/save', req)
+      .execute();
   }
 }

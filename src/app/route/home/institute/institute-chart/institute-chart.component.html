@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-body">
+    <h1>{{PREFIX + '.title' | translate}}</h1>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2 col-sm-12">
+            <div class="score">
+              <div class="text">
+                {{fieldsInfoRes.totalScore}}
+              </div>
+            </div>
+            <div class="tag">
+              {{PREFIX + '.totalScore' | translate}}
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-12">
+            <div class="score">
+              <div class="text">
+                {{fieldsInfoRes.totalFields}}
+              </div>
+            </div>
+            <div class="tag">
+              {{PREFIX + '.totalFields' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-institute-chart-card *ngFor="let institute of institutesInfoRes; let i = index"
+                              [fieldsInfoRes]="fieldsInfoRes"
+                              [instituteInfoRes]="institute">
+    </app-institute-chart-card>
+
+  </div>
+</div>

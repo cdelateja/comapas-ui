@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Company} from "../dto/class.definition";
+import {Company, CompanyRes, FieldFile} from "../dto/class.definition";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -7,17 +7,18 @@ import {Observable} from "rxjs";
 })
 export class ObservableService {
 
-  private refreshCompany: EventEmitter<Company> = new EventEmitter();
+  private refreshCompany: EventEmitter<CompanyRes> = new EventEmitter();
   private openCompanyModal: EventEmitter<Company> = new EventEmitter();
+  private viewFileModal: EventEmitter<FieldFile> = new EventEmitter();
 
   constructor() {
   }
 
-  public nextRefreshCompany(company: Company): void {
+  public nextRefreshCompany(company: CompanyRes): void {
     this.refreshCompany.next(company);
   }
 
-  public obsRefreshCompany(): Observable<Company> {
+  public obsRefreshCompany(): Observable<CompanyRes> {
     return this.refreshCompany.asObservable();
   }
 
@@ -27,5 +28,13 @@ export class ObservableService {
 
   public obsOpenModalCompany(): Observable<Company> {
     return this.openCompanyModal.asObservable();
+  }
+
+  public nextOpenModalViewFile(company: FieldFile): void {
+    this.viewFileModal.next(company);
+  }
+
+  public obsOpenModalViewFile(): Observable<FieldFile> {
+    return this.viewFileModal.asObservable();
   }
 }

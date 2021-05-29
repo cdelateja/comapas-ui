@@ -5,11 +5,11 @@
         <div class="card-body">
 
           <mat-tab-group animationDuration="0ms" mat-align-tabs="start">
+            <mat-tab label="{{PREFIX + '.subMenuCharts' | translate}}">
+              <app-institute-chart></app-institute-chart>
+            </mat-tab>
             <mat-tab label="{{PREFIX + '.subMenuInstitutes' | translate}}">
               <app-institute-table></app-institute-table>
-            </mat-tab>
-            <mat-tab label="Second">
-
             </mat-tab>
             <mat-tab label="Third">
 

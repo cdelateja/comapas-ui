@@ -1,0 +1,26 @@
+.institute-info {
+  .score {
+    padding: 15px;
+
+    .text {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #4e5fbb;
+      text-align: center;
+      margin: auto;
+      padding: 26px 0;
+      color: white;
+      font-size: 25px;
+    }
+  }
+
+  .name {
+    text-align: center;
+  }
+
+  .progress {
+    margin: auto;
+    height: auto;
+  }
+}

@@ -13,9 +13,23 @@
       "field": "Campos",
       "criterion": "Criterios",
       "sandBox": "Caja de arena"
+    },
+    "Institute": {
+      "home": "Mi instituto",
+      "test": "Cuestionario"
     }
   },
   "Components": {
+    "Common": {
+      "Button": {
+        "complete": "Completar"
+      },
+      "Upload": {
+      },
+      "ViewFile": {
+        "title": "Visualización de archivo"
+      }
+    },
     "Table": {
       "perPage": "No. elementos por página",
       "noData": "No se encontraron registro con el filtro: "
@@ -67,7 +81,8 @@
           "value": "Valor default",
           "catalog": "Catalogo",
           "evidence": "Evidencia",
-          "required": "Requerido"
+          "required": "Requerido",
+          "scoreValue": "Valor puntaje"
         }
       },
       "Criterion": {
@@ -103,6 +118,7 @@
       "Institute": {
         "title": "Organiza tu formulario",
         "subMenuInstitutes": "Ver institutos",
+        "subMenuCharts": "Estadisticas",
         "Table": {
           "title": "Institutos dados de alta",
           "idCompany": "ID",
@@ -117,6 +133,18 @@
           "name": "Nombre",
           "email": "Correo",
           "admin": "Usuario administrador"
+        },
+        "Test": {
+          "title": "Cuestionario",
+          "idCompany": "ID",
+          "name": "Nombre",
+          "email": "Correo",
+          "admin": "Usuario administrador"
+        },
+        "Chart": {
+          "title": "Estadisticas",
+          "totalScore": "Puntaje máximo",
+          "totalFields": "No. preguntas"
         }
       }
     }

@@ -1,0 +1,6 @@
+<div class="upload">
+  <input type="file" #fileInput (change)="uploadFile($event)">
+  <button type="button" class="btn btn-primary" *ngIf="file.filename" (click)="viewFile()">
+    {{'Core.show' | translate}}
+  </button>
+</div>
