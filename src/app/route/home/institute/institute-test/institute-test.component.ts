@@ -1,14 +1,13 @@
 import {Component, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CriterionService} from "../../../../services/criterion.service";
-import {ConfigurationService} from "../../../../services/configuration.service";
 import {ClientService, Response} from "cdelateja";
 import {Subscription} from "rxjs";
-import {toConfig} from "../../../../common/functions/functions";
-import {Config, Criterion, FormConfig, Institute, TestReq} from "../../../../dto/class.definition";
+import {Category, Criterion, Institute, TestReq} from "../../../../dto/class.definition";
 import {InstituteCriterionCardComponent} from "./institute-criterion-card/institute-criterion-card.component";
 import {InstituteService} from "../../../../services/institute.service";
 import {FileService} from "../../../../services/file.service";
+import {CategoryService} from "../../../../services/category.service";
 
 @Component({
   selector: 'app-institute-test',
@@ -22,18 +21,17 @@ export class InstituteTestComponent implements OnInit, OnDestroy {
 
   public PREFIX = 'Components.Structure.Institute.Test';
 
-  public config: Config;
   public institute: Institute;
   private idInstitute: number;
   private subscriptions: Subscription[] = [];
-  public criterionList: Criterion[] = [];
+  public categories: Category[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private criterionService: CriterionService,
               private instituteService: InstituteService,
               private fileService: FileService,
-              private configurationService: ConfigurationService) {
+              private categoryService: CategoryService) {
     this.route.params.subscribe(params => this.idInstitute = params.id);
     if (!this.idInstitute) {
       this.router.navigateByUrl('/comapas/home').then();
@@ -55,7 +53,7 @@ export class InstituteTestComponent implements OnInit, OnDestroy {
           this.institute = response.result;
           this.findFiles();
         }
-        this.findConfiguration();
+        this.findAllCategory();
       })
     );
   }
@@ -70,37 +68,14 @@ export class InstituteTestComponent implements OnInit, OnDestroy {
     );
   }
 
-
-  private findConfiguration(): void {
+  private findAllCategory(): void {
     this.subscriptions.push(
-      this.configurationService.findByName('FORM').subscribe((response: Response) => {
+      this.categoryService.findAll().subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.config = toConfig(response.result);
-        }
-        this.findAllCriterion();
-      })
-    );
-  }
-
-  private findAllCriterion(): void {
-    this.subscriptions.push(
-      this.criterionService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.listByConfig(response.result);
+          this.categories = response.result;
         }
       })
     );
-  }
-
-  private listByConfig(criterionList: Criterion[]) {
-    if (this.config) {
-      this.config.json.forEach((f: FormConfig) => {
-        const criterion = criterionList.find((c: Criterion) => c.idCriterion === f.idCriterion);
-        if (criterion) {
-          this.criterionList.push(criterion);
-        }
-      });
-    }
   }
 
   public save() {

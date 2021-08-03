@@ -27,6 +27,7 @@ export class ViewFileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.observableService.obsOpenModalViewFile().subscribe((file: FieldFile) => {
+        this.blobData = undefined;
         this.findContent(file);
         this.toggle();
       })
@@ -46,9 +47,9 @@ export class ViewFileComponent implements OnInit, OnDestroy {
   }
 
   private findContent(file: FieldFile) {
-    this.file = file;
     this.subscriptions.push(
       this.fileService.findFieldFile(file.idInstitute, file.idField).subscribe((data: Blob) => {
+        this.file = file;
         this.toType(data)
       })
     )
@@ -62,5 +63,6 @@ export class ViewFileComponent implements OnInit, OnDestroy {
         break
     }
   }
+
 
 }

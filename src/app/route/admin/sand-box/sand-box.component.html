@@ -4,35 +4,36 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
+
           <div class="row">
             <div class="col-12">
               <h1>{{PREFIX + '.title' | translate}}</h1>
             </div>
           </div>
+
           <div cdkDropList (cdkDropListDropped)="drop($event)">
-            <div class="row" *ngFor="let criterion of selectedCriterion; let i = index" cdkDrag>
+            <div class="row" *ngFor="let category of categories; let i = index" cdkDrag>
               <div class="col-12 text-center">
-                <fa-icon [icon]="faGripHorizontal" cdkDragHandle></fa-icon>
+                <fa-icon class='dragAndDrop' [icon]="faGripHorizontal" cdkDragHandle></fa-icon>
               </div>
               <div class="col-12">
-                <app-sand-box-criterion-card [criterion]="criterion"
-                                             [delete]="delete"
-                                             [save]="save"
-                                             [config]="config"></app-sand-box-criterion-card>
+                <app-sand-box-category-card [category]="category"
+                                            [open]="openCategory"
+                                            [delete]="delete"></app-sand-box-category-card>
               </div>
             </div>
           </div>
 
-          <button type="button" class="btn btn-outline-primary btn-lg btn-block" (click)="addCriterion()">
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block" (click)="addCategory()">
             {{'Core.btnAdd' | translate}}
           </button>
         </div>
+
       </div>
     </div>
   </div>
 
 </div>
-<app-sand-box-criterion [criterionList]="criterionList"
-                        [criterionCache]="criterionCache"
-                        [open]="open"
-                        [refresh]="refresh"></app-sand-box-criterion>
+<app-sand-box-category-modal [open]="openCategory"
+                             [refresh]="refresh"></app-sand-box-category-modal>
+<app-sand-box-criterion [categories]="categories"></app-sand-box-criterion>

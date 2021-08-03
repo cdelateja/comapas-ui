@@ -1,20 +1,12 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {
-  Config,
-  ConfigReq,
-  Criterion,
-  CriterionConfig,
-  DynamicField,
-  FormConfig,
-  FormFieldConfig
-} from "../../../dto/class.definition";
+import {Category, Criterion, CriterionConfig, PositionReq} from "../../../dto/class.definition";
 import {ClientService, Response} from 'cdelateja';
 import {Subscription} from "rxjs";
 import {CriterionService} from "../../../services/criterion.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {faGripHorizontal} from "@fortawesome/free-solid-svg-icons/faGripHorizontal";
-import {ConfigurationService} from "../../../services/configuration.service";
-import {toConfig} from "../../../common/functions/functions";
+import {CategoryService} from "../../../services/category.service";
+import {getPositionReq} from "../../../common/functions/functions";
 
 @Component({
   selector: 'app-sand-box',
@@ -26,113 +18,76 @@ export class SandBoxComponent implements OnInit, OnDestroy {
   public PREFIX = 'Components.Structure.SandBox';
 
   public faGripHorizontal = faGripHorizontal;
-  public delete: EventEmitter<CriterionConfig> = new EventEmitter();
-  public save: EventEmitter<CriterionConfig> = new EventEmitter();
-  public open: EventEmitter<CriterionConfig> = new EventEmitter();
-  public refresh: EventEmitter<CriterionConfig> = new EventEmitter();
-  public criterionList: CriterionConfig[] = [];
-  public criterionCache: CriterionConfig[] = [];
+  public delete: EventEmitter<Category> = new EventEmitter();
+  public openCategory: EventEmitter<Category> = new EventEmitter();
+  public refresh: EventEmitter<Category> = new EventEmitter();
+  public categories: Category[] = [];
+  public criterionList: Criterion[] = [];
   private subscriptions: Subscription[] = [];
   public selectedCriterion: CriterionConfig[] = [];
-  public config: Config;
 
   constructor(private criterionService: CriterionService,
-              private configurationService: ConfigurationService) {
+              private categoryService: CategoryService) {
   }
 
   public ngOnInit(): void {
-    this.refresh.subscribe((criterion: CriterionConfig) => {
-      this.pushCriterion(criterion);
+    this.refresh.subscribe((category: Category) => {
+      this.pushCategory(category);
     });
-    this.delete.subscribe((criterion: CriterionConfig) => {
-      this.removeCriterion(criterion);
+    this.delete.subscribe((category: Category) => {
+      this.removeCategory(category);
     });
-    this.save.subscribe(() => {
-      this.saveConfig();
-    });
-    this.subscriptions.push(
-      this.configurationService.findByName('FORM').subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.config = toConfig(response.result);
-        }
-        this.findAll();
-      })
-    );
+    this.findAllCategory();
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  public addCriterion() {
-    this.open.next(new CriterionConfig());
+  public addCategory() {
+    this.openCategory.next(new Category());
   }
 
-  private removeCriterion(criterion: CriterionConfig) {
-    this.selectedCriterion.forEach((value: Criterion, index: number) => {
-      if (value.idCriterion == criterion.idCriterion) this.selectedCriterion.splice(index, 1);
-    });
-    this.criterionList.push(criterion);
-  }
-
-  private pushCriterion(criterion: CriterionConfig) {
-    this.criterionList.forEach((value: Criterion, index: number) => {
-      if (value.idCriterion == criterion.idCriterion) this.criterionList.splice(index, 1);
-    });
-    this.selectedCriterion.push(criterion);
-  }
-
-  private findAll(): void {
+  private removeCategory(category: Category) {
     this.subscriptions.push(
-      this.criterionService.findAll().subscribe((response: Response) => {
+      this.categoryService.delete(category.idCategory).subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.listByConfig(response.result);
+          this.categories.forEach((value: Category, index: number) => {
+            if (value.idCategory == category.idCategory) this.categories.splice(index, 1);
+          });
         }
       })
     )
   }
 
-  private listByConfig(criterionList: CriterionConfig[]) {
-    this.criterionList = criterionList;
-    this.criterionCache = criterionList;
-    if (this.config) {
-      this.config.json.forEach((f: FormConfig) => {
-        const criterion = criterionList.find((c: CriterionConfig) => c.idCriterion === f.idCriterion);
-        if(criterion){
-          this.pushCriterion(criterion)
-        }
-      });
+  private pushCategory(category: Category) {
+    const foundCategory = this.categories.find((c: Category) => c.idCategory === category.idCategory);
+    if (foundCategory) {
+      foundCategory.name = category.name
+    } else {
+      this.categories.push(category);
     }
   }
 
-  public drop(event: CdkDragDrop<Criterion[]>): void {
-    moveItemInArray(this.selectedCriterion, event.previousIndex, event.currentIndex);
-    this.saveConfig();
-  }
-
-  public saveConfig() {
-    const config: FormConfig[] = [];
-    this.selectedCriterion.forEach((criterion: CriterionConfig) => {
-      const formConfig: FormConfig = new FormConfig();
-      formConfig.idCriterion = criterion.idCriterion;
-      criterion.dynamicFields.forEach((f: DynamicField) => {
-        const formFieldConfig: FormFieldConfig = new FormFieldConfig();
-        formFieldConfig.idField = f.idField;
-        formConfig.fields.push(formFieldConfig);
-      });
-      config.push(formConfig);
-    });
-    const req: ConfigReq = new ConfigReq();
-    req.name = 'FORM';
-    req.idFormConfig = this.config.idFormConfig;
-    req.json = JSON.stringify(config);
+  private findAllCategory(): void {
     this.subscriptions.push(
-      this.configurationService.save(req).subscribe((response: Response) => {
+      this.categoryService.findAll().subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.config = toConfig(response.result);
+          this.categories = response.result;
         }
       })
     );
   }
 
+  public drop(event: CdkDragDrop<Category[]>): void {
+    moveItemInArray(this.categories, event.previousIndex, event.currentIndex);
+    const request = getPositionReq(this.categories, 'idCategory')
+    this.subscriptions.push(
+      this.categoryService.position(request).subscribe((response: Response) => {
+        if (ClientService.validateData(response)) {
+
+        }
+      })
+    );
+  }
 }

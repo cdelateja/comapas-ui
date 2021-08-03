@@ -79,11 +79,11 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
     role.idRole = user.idRole
     userReq.role = role;
     this.reset(userReq);
-    if (user.id) {
-      this.disableField('password')
-    } else {
-      this.enabledField('password')
-    }
+    // if (user.id) {
+    //   this.disableField('password')
+    // } else {
+    //   this.enabledField('password')
+    // }
   }
 
   public save() {

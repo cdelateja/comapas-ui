@@ -38,4 +38,12 @@ export class InstituteService {
       .get(this.URL + '/institutesInfo')
       .execute();
   }
+
+  public getInstituteInfo(idInstitute: number): Observable<any> {
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/instituteInfo?idInstitute=' + idInstitute)
+      .execute();
+  }
 }

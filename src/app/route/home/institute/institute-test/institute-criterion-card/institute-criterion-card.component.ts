@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Config, Criterion, Institute, TestCriterionReq, TestFieldReq} from "../../../../../dto/class.definition";
+import {Criterion, Institute, TestCriterionReq, TestFieldReq} from "../../../../../dto/class.definition";
 import {DynamicForm} from "../../../../../common/components/dynamic.form";
 import {TranslateService} from "@ngx-translate/core";
 import {setFieldsValue, toDynamicFields} from "../../../../../common/functions/functions";
@@ -15,9 +15,6 @@ export class InstituteCriterionCardComponent extends DynamicForm implements OnIn
   public criterion: Criterion = new Criterion();
 
   @Input()
-  public config: Config;
-
-  @Input()
   public institute: Institute;
 
   constructor(protected translate: TranslateService) {
@@ -30,7 +27,7 @@ export class InstituteCriterionCardComponent extends DynamicForm implements OnIn
   }
 
   private listByConfig() {
-    this.fields = toDynamicFields(this.config, this.criterion);
+    this.fields = toDynamicFields(this.criterion);
     if (this.institute) {
       setFieldsValue(this.fields, this.institute);
     }

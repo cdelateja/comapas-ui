@@ -3,16 +3,13 @@
     "Administration": {
       "home": "Administración",
       "user": "Usuarios",
-      "field": "Campos",
+      "field": "Indicadores",
       "criterion": "Criterios",
       "sandBox": "Caja de arena"
     },
     "Home": {
       "home": "Inicio",
-      "institute": "Instituto",
-      "field": "Campos",
-      "criterion": "Criterios",
-      "sandBox": "Caja de arena"
+      "institute": "Instituto"
     },
     "Institute": {
       "home": "Mi instituto",
@@ -60,7 +57,7 @@
         }
       },
       "Field": {
-        "title": "Gestión de preguntas",
+        "title": "Gestión de indicadores",
         "searchPlaceHolder": "Busca por pregunta",
         "idField": "ID",
         "label": "Pregunta",
@@ -95,6 +92,7 @@
         },
         "FieldModal": {
           "title": "Criterio: ",
+          "searchPlaceHolder": "Busca por pregunta",
           "idCriterion": "ID",
           "name": "Nombre",
           "idField": "ID",
@@ -113,6 +111,13 @@
           "name": "Nombre",
           "count": "# Preguntas",
           "searchPlaceHolder": "Busca por el nombre del criterio"
+        },
+        "CategoryModal": {
+          "title": "Datos de la categoria",
+          "name": "Nombre"
+        },
+        "CategoryCard": {
+          "btnAddCriterion": "Agregar criterio"
         }
       },
       "Institute": {
@@ -139,7 +144,14 @@
           "idCompany": "ID",
           "name": "Nombre",
           "email": "Correo",
-          "admin": "Usuario administrador"
+          "admin": "Usuario administrador",
+          "Footer": {
+            "totalAnswered": "Preguntas resueltas",
+            "idCompany": "ID",
+            "name": "Nombre",
+            "email": "Correo",
+            "admin": "Usuario administrador"
+          }
         },
         "Chart": {
           "title": "Estadisticas",

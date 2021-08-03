@@ -10,11 +10,10 @@
             </div>
           </div>
 
-          <div class="row" *ngFor="let criterion of criterionList; let i = index" cdkDrag>
+          <div class="row" *ngFor="let category of categories; let i = index">
             <div class="col">
-              <app-institute-criterion-card [criterion]="criterion"
-                                            [config]="config"
-                                            [institute]="institute"></app-institute-criterion-card>
+              <app-institute-category-card [category]="category"
+                                           [institute]="institute"></app-institute-category-card>
             </div>
           </div>
 
@@ -37,5 +36,8 @@
     </div>
 
   </div>
+
+  <app-institute-test-footer></app-institute-test-footer>
 </div>
+
 <app-view-file></app-view-file>

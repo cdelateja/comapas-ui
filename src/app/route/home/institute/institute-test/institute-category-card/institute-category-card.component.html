@@ -1,0 +1,11 @@
+<div>
+  <h1>
+    {{category.name}}
+  </h1>
+  <div class="row" *ngFor="let criterion of category.criterionList; let i = index">
+    <div class="col">
+      <app-institute-criterion-card [criterion]="criterion"
+                                    [institute]="institute"></app-institute-criterion-card>
+    </div>
+  </div>
+</div>

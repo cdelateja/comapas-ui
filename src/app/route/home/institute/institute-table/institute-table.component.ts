@@ -29,6 +29,7 @@ export class InstituteTableComponent implements OnInit, OnDestroy, AfterViewInit
   public dataSource = new MatTableDataSource<CompanyRes>(this.institutes);
   private subscriptions: Subscription[] = [];
 
+
   constructor(private companyService: CompanyService,
               private observableService: ObservableService,
               private router: Router) {

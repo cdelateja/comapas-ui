@@ -7,15 +7,17 @@
                     (keyup)="searchByWord(search.value)"></ct-textfield>
     </div>
 
-    <div class="row form-group">
+    <div class="row">
       <div class="col-md-12">
-
         <div class="float-right">
           <button type="button" class="btn btn-primary" (click)="addCompany()">
             {{'Core.btnAdd' | translate}}
           </button>
         </div>
-
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-12">
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource">
 

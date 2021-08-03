@@ -9,9 +9,9 @@
       </div>
       <div class="modal-body">
         <div class="card-image">
-          <img [src]="blobData | safeUrl" *ngIf="file.contentType === 'image/png'" alt="image"/>
+          <img [src]="blobData | safeUrl" *ngIf="file.contentType === 'image/png' && blobData" alt="image"/>
           <ngx-extended-pdf-viewer [src]="blobData"
-                                   *ngIf="file.contentType === 'application/pdf'">
+                                   *ngIf="file.contentType === 'application/pdf' && blobData">
           </ngx-extended-pdf-viewer>
         </div>
       </div>

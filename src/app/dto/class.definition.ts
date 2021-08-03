@@ -100,6 +100,13 @@ export class CriterionField {
   public idCriterion: number = null;
   public idField: number = null;
   public field: Field = null;
+  public position: number = null;
+}
+
+export class Category {
+  public idCategory: number = null;
+  public name = '';
+  public criterionList: Criterion[] = [];
 }
 
 export class CriterionReq {
@@ -107,34 +114,33 @@ export class CriterionReq {
   public name = '';
 }
 
+export class CategoryReq {
+  public idCategory: number = null;
+  public name = '';
+}
+
+export class PositionReq {
+  public order: number[] = [];
+}
+
 export class CriterionFieldReq {
   public idCriterion: number = null;
   public fields: number[] = [];
+}
+
+export class CategoryCriterionReq {
+  public idCategory: number = null;
+  public criterionList: number[] = [];
 }
 
 export class CriterionConfig extends Criterion {
   public dynamicFields: DynamicField[] = [];
 }
 
-export class FormConfig {
-  public idCriterion: number = null;
-  public fields: FormFieldConfig[] = [];
-}
-
-export class FormFieldConfig {
-  public idField: number = null;
-}
-
 export class ConfigReq {
   public idFormConfig: number = null;
   public name = '';
   public json = '';
-}
-
-export class Config {
-  public idFormConfig: number = null;
-  public name = '';
-  public json: FormConfig[] = [];
 }
 
 export class Company {

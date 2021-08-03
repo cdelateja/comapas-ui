@@ -7,17 +7,21 @@
 
           <div class="form-group">
             <ct-textfield [placeHolder]="PREFIX+'.searchPlaceHolder'" #search
-                          (keyup)="searchByWord(search.control.value)"></ct-textfield>
+                          (keyup)="searchByWord(search.value)"></ct-textfield>
           </div>
 
-          <div class="row form-group">
+          <div class="row">
             <div class="col-md-12">
-
               <div class="float-right">
                 <button type="button" class="btn btn-primary" (click)="addUser()">
                   {{'Core.btnAdd' | translate}}
                 </button>
               </div>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
 
               <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
@@ -101,7 +105,7 @@
                   <!-- Row shown when there is no matching data. -->
                   <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4">
-                      {{'Components.Table.noData' | translate}}"{{search.control.value}}"
+                      {{'Components.Table.noData' | translate}}"{{search.value}}"
                     </td>
                   </tr>
                 </table>

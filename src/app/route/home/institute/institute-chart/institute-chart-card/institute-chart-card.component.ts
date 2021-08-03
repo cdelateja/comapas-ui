@@ -43,7 +43,8 @@ export class InstituteChartCardComponent implements OnInit, OnDestroy {
     );
   }
 
-  public getProgress(): number{
+  public getProgress(): number {
     return (this.instituteInfoRes.totalFields * 100) / this.fieldsInfoRes.totalFields;
   }
+
 }

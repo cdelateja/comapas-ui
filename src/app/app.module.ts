@@ -60,6 +60,11 @@ import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import {InstituteChartComponent} from './route/home/institute/institute-chart/institute-chart.component';
 import {InstituteChartCardComponent} from './route/home/institute/institute-chart/institute-chart-card/institute-chart-card.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { SandBoxCategoryModalComponent } from './route/admin/sand-box/sand-box-category-modal/sand-box-category-modal.component';
+import { SandBoxCategoryCardComponent } from './route/admin/sand-box/sand-box-category-card/sand-box-category-card.component';
+import { InstituteCategoryCardComponent } from './route/home/institute/institute-test/institute-category-card/institute-category-card.component';
+import { InstituteTestFooterComponent } from './route/home/institute/institute-test/institute-test-footer/institute-test-footer.component';
+import { HomeInstituteComponent } from './route/home-institute/home-institute.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +105,12 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ViewFileComponent,
     SafeUrlPipe,
     InstituteChartComponent,
-    InstituteChartCardComponent
+    InstituteChartCardComponent,
+    SandBoxCategoryModalComponent,
+    SandBoxCategoryCardComponent,
+    InstituteCategoryCardComponent,
+    InstituteTestFooterComponent,
+    HomeInstituteComponent
   ],
   imports: [
     BrowserModule,

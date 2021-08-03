@@ -1,21 +1,12 @@
 import {
-  Config,
-  ConfigReq,
-  Criterion,
-  CriterionField,
+  Criterion, CriterionField,
   DynamicField,
-  Field, FieldFile,
-  FormConfig,
-  FormFieldConfig, Institute, InstituteField
+  Field,
+  FieldFile,
+  Institute,
+  InstituteField,
+  PositionReq
 } from "../../dto/class.definition";
-
-export function toConfig(req: ConfigReq): Config {
-  const config: Config = new Config();
-  config.idFormConfig = req.idFormConfig;
-  config.name = req.name;
-  config.json = JSON.parse(req.json);
-  return config;
-}
 
 export function toDynamicField(field: Field): DynamicField {
   const dynamicField: DynamicField = new DynamicField();
@@ -33,45 +24,21 @@ export function toDynamicField(field: Field): DynamicField {
   return dynamicField;
 }
 
-export function toDynamicFields(config: Config, criterion: Criterion): DynamicField[] {
+export function toDynamicFields(criterion: Criterion): DynamicField[] {
   let fields: DynamicField[] = [];
-  if (config) {
-    const formConfig: FormConfig = config.json.find((f: FormConfig) => f.idCriterion === criterion.idCriterion);
-    if (formConfig) {
-      fields = fieldsByConfig(formConfig, criterion)
-    } else {
-      criterion.fields.forEach(f => {
-        const dynamicField: DynamicField = toDynamicField(f.field);
-        fields.push(dynamicField);
-      });
-    }
-  }
+  criterion.fields.sort((a: CriterionField, b: CriterionField) => a.position - b.position)
+  criterion.fields.forEach(f => {
+    const dynamicField: DynamicField = toDynamicField(f.field);
+    fields.push(dynamicField);
+  });
   return fields;
-}
-
-export function fieldsByConfig(formConfig: FormConfig, criterion: Criterion): DynamicField[] {
-  const fields: DynamicField[] = [];
-  formConfig.fields.forEach((fC: FormFieldConfig) => {
-    const criterionField: CriterionField = criterion.fields.find((field: CriterionField) =>
-      field.idField === fC.idField);
-    if (criterionField) {
-      fields.push(toDynamicField(criterionField.field));
-    }
-  });
-  criterion.fields.forEach((f: CriterionField) => {
-    const field = fields.find((d: DynamicField) => d.idField === f.idField);
-    if (!field) {
-      fields.push(toDynamicField(f.field));
-    }
-  });
-  return fields
 }
 
 export function setFieldsValue(fields: DynamicField[], institute: Institute): void {
   fields.forEach((field: DynamicField) => {
     const instituteField: InstituteField = institute.fields.find((f: InstituteField) => f.idField === field.idField);
     const fileField: FieldFile = institute.files.find((f: FieldFile) => f.idField === field.idField);
-    field.value = valueByType(field.type, instituteField.value);
+    if (instituteField) field.value = valueByType(field.type, instituteField.value);
     field.file = fileField;
   });
 
@@ -111,4 +78,10 @@ function validationByType(type: string): any {
 
 export function toStringDate(date: Date): string {
   return date.toISOString();
+}
+
+export function getPositionReq(date: any[], property: string): PositionReq {
+  const request = new PositionReq();
+  date.forEach(c => request.order.push(c[property]))
+  return request;
 }
