@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from 'rxjs';
 import {IdReq, UserReq} from "../dto/class.definition";
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class UserService {
       .create()
       .withToken()
       .get(this.URL + '/findAll')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public save(req: UserReq): Observable<any> {
@@ -28,7 +30,8 @@ export class UserService {
       .create()
       .withToken()
       .post(this.URL + '/save', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public changeStatus(req: IdReq): Observable<any> {
@@ -36,7 +39,8 @@ export class UserService {
       .create()
       .withToken()
       .post(this.URL + '/changeStatus', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public findByIdCompany(idCompany: number): Observable<any> {
@@ -44,7 +48,8 @@ export class UserService {
       .create()
       .withToken()
       .get(this.URL + '/users?idCompany=' + idCompany)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
 

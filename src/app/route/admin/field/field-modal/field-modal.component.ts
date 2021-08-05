@@ -39,21 +39,19 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
 
   public ngOnInit(): void {
     this.disableField('idField');
-    this.subscriptions.push(
+    this.pushSubscription(
       this.open.subscribe((field: Field) => {
         this.setField(field)
         this.toggle();
       })
     );
 
-    this.subscriptions.push(
-      this.fieldService.getTypes().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.types = response.result;
-        }
-      })
-    );
-    this.subscriptions.push(
+    this.fieldService.getTypes().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.types = response.result;
+      }
+    });
+    this.pushSubscription(
       this.getFieldObservable('type').subscribe((value) => {
         this.disableField('catalog');
         this.removeValidators(['catalog', 'scoreValue']);
@@ -85,15 +83,13 @@ export class FieldModalComponent extends AbstractValidator implements OnInit {
   public save(): void {
     if (this.validateForm()) {
       const req: FieldReq = this.formGroup.getRawValue();
-      req.catalog = (req.catalog === null || req.catalog === '' ) ? [] : req.catalog;
-      this.subscriptions.push(
-        this.fieldService.saveField(req).subscribe((response: Response) => {
-          if (ClientService.validateData(response)) {
-            this.refresh.next(response.result);
-            this.toggle();
-          }
-        })
-      );
+      req.catalog = (req.catalog === null || req.catalog === '') ? [] : req.catalog;
+      this.fieldService.saveField(req).subscribe((response: Response) => {
+        if (ClientService.validateData(response)) {
+          this.refresh.next(response.result);
+          this.toggle();
+        }
+      });
     }
   }
 

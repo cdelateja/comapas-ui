@@ -16,6 +16,49 @@
       "test": "Cuestionario"
     }
   },
+  "Models": {
+    "User": {
+      "id": "ID",
+      "userName": "Nombre de usuario",
+      "password": "Contraseña",
+      "secretKey": "Llave secreta",
+      "email": "Correo",
+      "active": "Estatus",
+      "ip": "IP",
+      "role": "Perfil"
+    },
+    "Field": {
+      "idField": "ID",
+      "label": "Pregunta",
+      "name": "Nombre",
+      "score": "Puntaje",
+      "type": "Tipo",
+      "value": "Valor default",
+      "catalog": "Catalogo",
+      "evidence": "Evidencia",
+      "required": "Requerido",
+      "scoreValue": "Valor puntaje"
+    },
+    "Criterion": {
+      "idCriterion": "ID",
+      "name": "Nombre"
+    },
+    "Category": {
+      "idCategory": "ID",
+      "name": "Nombre"
+    },
+    "Company": {
+      "idCompany": "ID",
+      "name": "Nombre"
+    },
+    "Address": {
+      "idAddress": "ID",
+      "street": "Calle",
+      "city": "Ciudad",
+      "state": "Estado",
+      "zipCode": "Código postal"
+    }
+  },
   "Components": {
     "Common": {
       "Button": {
@@ -25,96 +68,54 @@
       },
       "ViewFile": {
         "title": "Visualización de archivo"
+      },
+      "Labels": {
+        "totalAnswered": "Preguntas resueltas",
+        "totalScored": "Puntaje total"
       }
     },
     "Table": {
       "perPage": "No. elementos por página",
-      "noData": "No se encontraron registro con el filtro: "
+      "noData": "No se encontraron registros con el filtro: "
     },
     "Structure": {
       "User": {
         "title": "Gestión de usuarios",
         "searchPlaceHolder": "Busca por nombre de usuario",
-        "id": "ID",
-        "userName": "Nombre de usuario",
-        "password": "Contraseña",
-        "secretKey": "Llave secreta",
-        "email": "Correo",
-        "active": "Estatus",
-        "ip": "IP",
-        "role": "Perfil",
         "attention": "Atencion",
         "activate": "Se va a activar el usuario ¿Desea continuar?",
         "deactivate": "Se va a desactivar el usuario. ¿Desea continuar?",
         "Modal": {
-          "title": "Datos del usuario",
-          "id": "ID",
-          "userName": "Nombre de usuario",
-          "password": "Contraseña",
-          "secretKey": "Llave secreta",
-          "email": "Correo",
-          "role": "Perfil"
+          "title": "Datos del usuario"
         }
       },
       "Field": {
         "title": "Gestión de indicadores",
         "searchPlaceHolder": "Busca por pregunta",
-        "idField": "ID",
-        "label": "Pregunta",
-        "name": "Nombre",
-        "score": "Puntaje",
-        "type": "Tipo",
-        "value": "Valor default",
-        "catalog": "Catalogo",
-        "evidence": "Evidencia",
-        "required": "Requerido",
         "Modal": {
-          "title": "Datos de la pregunta",
-          "idField": "ID",
-          "label": "Pregunta",
-          "name": "Nombre",
-          "score": "Puntaje",
-          "type": "Tipo",
-          "value": "Valor default",
-          "catalog": "Catalogo",
-          "evidence": "Evidencia",
-          "required": "Requerido",
-          "scoreValue": "Valor puntaje"
+          "title": "Datos de la pregunta"
         }
       },
       "Criterion": {
         "title": "Gestión de criterios",
         "fields": "Campos",
         "Modal": {
-          "title": "Datos del criterio",
-          "idCriterion": "ID",
-          "name": "Nombre"
+          "title": "Datos del criterio"
         },
         "FieldModal": {
           "title": "Criterio: ",
-          "searchPlaceHolder": "Busca por pregunta",
-          "idCriterion": "ID",
-          "name": "Nombre",
-          "idField": "ID",
-          "label": "Pregunta",
-          "score": "Puntaje",
-          "type": "Tipo",
-          "value": "Valor default",
-          "catalog": "Catalogo",
-          "evidence": "Evidencia"
+          "searchPlaceHolder": "Busca por pregunta"
         }
       },
       "SandBox": {
         "title": "Organiza tu formulario",
         "CriterionModal": {
           "title": "Criterios disponibles",
-          "name": "Nombre",
           "count": "# Preguntas",
           "searchPlaceHolder": "Busca por el nombre del criterio"
         },
         "CategoryModal": {
-          "title": "Datos de la categoria",
-          "name": "Nombre"
+          "title": "Datos de la categoria"
         },
         "CategoryCard": {
           "btnAddCriterion": "Agregar criterio"
@@ -126,18 +127,20 @@
         "subMenuCharts": "Estadisticas",
         "Table": {
           "title": "Institutos dados de alta",
-          "idCompany": "ID",
-          "name": "Nombre",
           "admin": "Usuario administrador",
           "test": "Cuestionario",
+          "totalAnswered": "Preguntas resueltas",
+          "totalScored": "Puntaje total",
           "searchPlaceHolder": "Busca por el nombre del criterio"
         },
         "Modal": {
           "title": "Datos del instituto",
           "idCompany": "ID",
-          "name": "Nombre",
-          "email": "Correo",
-          "admin": "Usuario administrador"
+          "name": "Nombre del instituto",
+          "email": "Correo a quien se le notificará el alta",
+          "admin": "Usuario administrador",
+          "Address": {
+          }
         },
         "Test": {
           "title": "Cuestionario",
@@ -147,9 +150,7 @@
           "admin": "Usuario administrador",
           "Footer": {
             "totalAnswered": "Preguntas resueltas",
-            "idCompany": "ID",
-            "name": "Nombre",
-            "email": "Correo",
+            "totalScored": "Puntaje total",
             "admin": "Usuario administrador"
           }
         },

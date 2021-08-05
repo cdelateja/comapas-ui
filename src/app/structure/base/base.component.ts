@@ -9,7 +9,7 @@ import {faSchool} from "@fortawesome/free-solid-svg-icons/faSchool";
 import {Company} from "../../dto/class.definition";
 import {Subscription} from "rxjs";
 import {CompanyService} from "../../services/company.service";
-import {ClientService, Response} from "../../../../../angular-lib/dist/cdelateja";
+import {ClientService, Response} from "cdelateja";
 
 @Component({
   selector: 'app-base',

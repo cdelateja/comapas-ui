@@ -49,15 +49,13 @@ export class SandBoxComponent implements OnInit, OnDestroy {
   }
 
   private removeCategory(category: Category) {
-    this.subscriptions.push(
-      this.categoryService.delete(category.idCategory).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.categories.forEach((value: Category, index: number) => {
-            if (value.idCategory == category.idCategory) this.categories.splice(index, 1);
-          });
-        }
-      })
-    )
+    this.categoryService.delete(category.idCategory).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.categories.forEach((value: Category, index: number) => {
+          if (value.idCategory == category.idCategory) this.categories.splice(index, 1);
+        });
+      }
+    });
   }
 
   private pushCategory(category: Category) {
@@ -70,24 +68,20 @@ export class SandBoxComponent implements OnInit, OnDestroy {
   }
 
   private findAllCategory(): void {
-    this.subscriptions.push(
-      this.categoryService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.categories = response.result;
-        }
-      })
-    );
+    this.categoryService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.categories = response.result;
+      }
+    });
   }
 
   public drop(event: CdkDragDrop<Category[]>): void {
     moveItemInArray(this.categories, event.previousIndex, event.currentIndex);
     const request = getPositionReq(this.categories, 'idCategory')
-    this.subscriptions.push(
-      this.categoryService.position(request).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
+    this.categoryService.position(request).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
 
-        }
-      })
-    );
+      }
+    });
   }
 }

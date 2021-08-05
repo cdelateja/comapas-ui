@@ -47,17 +47,15 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
         this.setUser(user)
         this.toggle();
       }));
-    this.subscriptions.push(
-      this.roleService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          response.result.forEach(e => {
-            const role = new Role();
-            Object.assign(role, e);
-            this.roles.push(role);
-          });
-        }
-      })
-    );
+    this.roleService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        response.result.forEach(e => {
+          const role = new Role();
+          Object.assign(role, e);
+          this.roles.push(role);
+        });
+      }
+    });
     this.disableField('id')
   }
 
@@ -79,11 +77,6 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
     role.idRole = user.idRole
     userReq.role = role;
     this.reset(userReq);
-    // if (user.id) {
-    //   this.disableField('password')
-    // } else {
-    //   this.enabledField('password')
-    // }
   }
 
   public save() {
@@ -91,13 +84,12 @@ export class UserModalComponent extends AbstractValidator implements OnInit {
       const userReq: UserReq = this.formGroup.getRawValue();
       userReq.idRole = userReq.role.idRole;
       userReq.idCompany = this.company.idCompany;
-      this.subscriptions.push(
-        this.userService.save(userReq).subscribe((response: Response) => {
-          if (ClientService.validateData(response)) {
-            this.refresh.next(response.result);
-            this.toggle();
-          }
-        }));
+      this.userService.save(userReq).subscribe((response: Response) => {
+        if (ClientService.validateData(response)) {
+          this.refresh.next(response.result);
+          this.toggle();
+        }
+      });
     }
   }
 }

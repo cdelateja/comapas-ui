@@ -1,8 +1,7 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import {Criterion, CriterionField, Field} from "../../../dto/class.definition";
-import {ClientService, Response} from "cdelateja";
+import {BaseComponent, ClientService, Response} from "cdelateja";
 import {CriterionService} from "../../../services/criterion.service";
-import {Subscription} from "rxjs";
 import {FieldService} from "../../../services/field.service";
 
 @Component({
@@ -10,13 +9,12 @@ import {FieldService} from "../../../services/field.service";
   templateUrl: './criterion.component.html',
   styleUrls: ['./criterion.component.scss']
 })
-export class CriterionComponent implements OnInit, OnDestroy {
+export class CriterionComponent extends BaseComponent {
 
   public PREFIX = 'Components.Structure.Criterion';
 
   public criterionList: Criterion[] = [];
   public criterionListCache: Criterion[] = [];
-  private subscriptions: Subscription[] = [];
   public fields: Field[] = [];
   public open: EventEmitter<Criterion> = new EventEmitter();
   public openCriField: EventEmitter<Criterion> = new EventEmitter();
@@ -24,44 +22,39 @@ export class CriterionComponent implements OnInit, OnDestroy {
 
   constructor(private criterionService: CriterionService,
               private fieldService: FieldService) {
+    super();
   }
 
   ngOnInit(): void {
     this.findAll();
-    this.refresh.subscribe((criterion: Criterion) => {
-      this.pushCriterion(criterion);
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
-  private findAll(): void {
-    this.subscriptions.push(
-      this.criterionService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.criterionList = response.result;
-          this.criterionListCache = response.result;
-          this.findFields();
-        }
-      })
-    )
-  }
-
-  private findFields(): void {
-    this.subscriptions.push(
-      this.fieldService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.removeSelectedFields(response.result);
-        }
+    this.pushSubscription(
+      this.refresh.subscribe((criterion: Criterion) => {
+        this.pushCriterion(criterion);
       })
     );
   }
 
+  private findAll(): void {
+    this.criterionService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.criterionList = response.result;
+        this.criterionListCache = response.result;
+        this.findFields();
+      }
+    });
+  }
+
+  private findFields(): void {
+    this.fieldService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.removeSelectedFields(response.result);
+      }
+    });
+  }
+
   private removeSelectedFields(fields: Field[]) {
-    this.criterionList.forEach((criterion: Criterion) =>{
-      criterion.fields.forEach((criterionField: CriterionField) =>{
+    this.criterionList.forEach((criterion: Criterion) => {
+      criterion.fields.forEach((criterionField: CriterionField) => {
         fields.forEach((value: Field, index: number) => {
           if (value.idField == criterionField.field.idField) fields.splice(index, 1);
         });
@@ -86,7 +79,6 @@ export class CriterionComponent implements OnInit, OnDestroy {
     const cri = this.findCriterion(criterion);
     if (cri) {
       cri.name = criterion.name
-      cri.fields = criterion.fields
     } else {
       this.criterionListCache.push(criterion);
     }

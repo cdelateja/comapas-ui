@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from "rxjs";
 import {TestReq} from "../dto/class.definition";
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class InstituteService {
       .create()
       .withToken()
       .get(this.URL + '/find?idInstitute=' + idInstitute)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public saveTest(req: TestReq): Observable<any> {
@@ -28,7 +30,8 @@ export class InstituteService {
       .create()
       .withToken()
       .post(this.URL + '/test', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public getFieldsInfo(): Observable<any> {
@@ -36,7 +39,8 @@ export class InstituteService {
       .create()
       .withToken()
       .get(this.URL + '/institutesInfo')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public getInstituteInfo(idInstitute: number): Observable<any> {
@@ -44,6 +48,7 @@ export class InstituteService {
       .create()
       .withToken()
       .get(this.URL + '/instituteInfo?idInstitute=' + idInstitute)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 }

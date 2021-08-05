@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup" [attr.id]="formId">
+  <div class="form-row">
+    <div class="col-md">
+      <ct-textfield class="d-none" [label]="getDrawerProperty('P_M_ADDRESS')+'.idAddress'"
+                    [formControlName]="'idAddress'"></ct-textfield>
+      <ct-textfield [label]="getDrawerProperty('P_M_ADDRESS')+'.street'"
+                    [formControlName]="'street'"></ct-textfield>
+      <ct-textfield [label]="getDrawerProperty('P_M_ADDRESS')+'.city'"
+                    [formControlName]="'city'">
+      </ct-textfield><ct-textfield [label]="getDrawerProperty('P_M_ADDRESS')+'.state'"
+                    [formControlName]="'state'"></ct-textfield>
+      <ct-textfield [label]="getDrawerProperty('P_M_ADDRESS')+'.zipCode'"
+                    [formControlName]="'zipCode'"></ct-textfield>
+    </div>
+  </div>
+</form>

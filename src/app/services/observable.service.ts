@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Category, Company, CompanyRes, Criterion, FieldFile} from "../dto/class.definition";
+import {Category, Company, CompanyReq, CompanyRes, Criterion, FieldFile} from "../dto/class.definition";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 export class ObservableService {
 
   private refreshCompany: EventEmitter<CompanyRes> = new EventEmitter();
-  private openCompanyModal: EventEmitter<Company> = new EventEmitter();
+  private openCompanyModal: EventEmitter<CompanyReq> = new EventEmitter();
   private viewFileModal: EventEmitter<FieldFile> = new EventEmitter();
   private openCriterionModal: EventEmitter<Category> = new EventEmitter();
 
@@ -23,11 +23,11 @@ export class ObservableService {
     return this.refreshCompany.asObservable();
   }
 
-  public nextOpenModalCompany(company: Company): void {
+  public nextOpenModalCompany(company: CompanyReq): void {
     this.openCompanyModal.next(company);
   }
 
-  public obsOpenModalCompany(): Observable<Company> {
+  public obsOpenModalCompany(): Observable<CompanyReq> {
     return this.openCompanyModal.asObservable();
   }
 

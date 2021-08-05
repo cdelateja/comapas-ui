@@ -28,7 +28,7 @@
 
                   <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef>
-                      {{PREFIX + '.id' | translate}}
+                      {{getDrawerProperty('P_M_USER') + '.id' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                       {{element.id}}
@@ -37,7 +37,7 @@
 
                   <ng-container matColumnDef="username">
                     <th mat-header-cell *matHeaderCellDef>
-                      {{PREFIX + '.userName' | translate}}
+                      {{getDrawerProperty('P_M_USER') + '.userName' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                       {{element.username}}
@@ -46,7 +46,7 @@
 
                   <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef>
-                      {{PREFIX + '.email' | translate}}
+                      {{getDrawerProperty('P_M_USER') + '.email' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                       {{element.email}}
@@ -55,7 +55,7 @@
 
                   <ng-container matColumnDef="ip">
                     <th mat-header-cell *matHeaderCellDef>
-                      {{PREFIX + '.ip' | translate}}
+                      {{getDrawerProperty('P_M_USER') + '.ip' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                       {{element.ip}}
@@ -64,7 +64,7 @@
 
                   <ng-container matColumnDef="role">
                     <th mat-header-cell *matHeaderCellDef>
-                      {{PREFIX + '.role' | translate}}
+                      {{getDrawerProperty('P_M_USER') + '.role' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                       {{getRole(element.idRole)}}
@@ -73,7 +73,7 @@
 
                   <ng-container matColumnDef="active">
                     <th mat-header-cell *matHeaderCellDef>
-                      {{PREFIX + '.active' | translate}}
+                      {{getDrawerProperty('P_M_USER') + '.active' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                       <button type="button" class="btn btn-success"

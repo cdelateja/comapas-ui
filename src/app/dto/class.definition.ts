@@ -146,18 +146,60 @@ export class ConfigReq {
 export class Company {
   public idCompany: number = null;
   public name = '';
+  public address: Address = new Address();
+}
+
+export class Address {
+  public idAddress: number = null;
+  public street = '';
+  public city = '';
+  public state = '';
+  public zipCode = '';
 }
 
 export class CompanyReq {
   public idCompany: number = null;
   public name = '';
   public email = '';
+  public address: AddressReq = null;
+}
+
+export class AddressReq {
+  public idAddress: number = null;
+  public street = '';
+  public city = '';
+  public state = '';
+  public zipCode = '';
+}
+
+export class CompanyDetailRes {
+  public idCompany: number = null;
+  public name = '';
+  public users: CompanyDetailUserRes[] = [];
+  public addresses: CompanyDetailAddressRes[] = [];
+}
+
+export class CompanyDetailUserRes {
+  public id: number;
+  public username = '';
+  public email = '';
+  public admin = false;
+}
+
+export class CompanyDetailAddressRes {
+  public idAddress: number = null;
+  public street = '';
+  public city = '';
+  public state = '';
+  public zipCode = '';
 }
 
 export class CompanyRes {
   public idCompany: number = null;
   public name = '';
   public users: CompanyUserRes[] = [];
+  // For expand detail table purpose
+  public show = false;
 }
 
 export class CompanyUserRes {
@@ -208,6 +250,6 @@ export class FieldsInfoRes {
 
 export class InstituteInfoRes {
   public idInstitute: number;
-  public totalScore: number;
-  public totalFields: number;
+  public totalScore: number = 0;
+  public totalFields: number = 0;
 }

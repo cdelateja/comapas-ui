@@ -3,7 +3,8 @@ import {InstituteService} from '../../../../services/institute.service';
 import {FieldService} from '../../../../services/field.service';
 import {Subscription} from 'rxjs';
 import {ClientService, Response} from 'cdelateja';
-import {FieldsInfoRes, InstituteInfoRes} from '../../../../dto/class.definition';
+import {CompanyRes, FieldsInfoRes, InstituteInfoRes} from '../../../../dto/class.definition';
+import {CompanyService} from "../../../../services/company.service";
 
 @Component({
   selector: 'app-institute-chart',
@@ -15,10 +16,11 @@ export class InstituteChartComponent implements OnInit, OnDestroy {
   public PREFIX = 'Components.Structure.Institute.Chart';
   private subscriptions: Subscription[] = [];
 
+  public institutes: CompanyRes[] = [];
   public fieldsInfoRes: FieldsInfoRes = new FieldsInfoRes();
-  public institutesInfoRes: InstituteInfoRes[] = [];
 
   constructor(private instituteService: InstituteService,
+              private companyService: CompanyService,
               private fieldService: FieldService) {
   }
 
@@ -31,24 +33,20 @@ export class InstituteChartComponent implements OnInit, OnDestroy {
   }
 
   private findFieldsInfo(): void {
-    this.subscriptions.push(
-      this.fieldService.getFieldsInfo().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.fieldsInfoRes = response.result;
-          this.findInstitutesInfo();
-        }
-      })
-    );
+    this.fieldService.getFieldsInfo().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.fieldsInfoRes = response.result;
+        this.findInstitutes();
+      }
+    });
   }
 
-  private findInstitutesInfo() {
-    this.subscriptions.push(
-      this.instituteService.getFieldsInfo().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.institutesInfoRes = response.result;
-        }
-      })
-    );
+  private findInstitutes() {
+    this.companyService.findExternals().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.institutes = response.result;
+      }
+    });
   }
 
 }

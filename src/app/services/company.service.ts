@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ClientService, ConfigService} from "cdelateja";
 import {Observable} from "rxjs";
 import {CompanyReq} from "../dto/class.definition";
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class CompanyService {
     return this.clientService
       .create()
       .withToken()
-      .get(this.URL + '/findAll').execute();
+      .get(this.URL + '/findAll')
+      .execute()
+      .pipe(first());
   }
 
   public findExternals(): Observable<any> {
@@ -27,7 +30,8 @@ export class CompanyService {
       .create()
       .withToken()
       .get(this.URL + '/externals')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public findInner(): Observable<any> {
@@ -35,7 +39,8 @@ export class CompanyService {
       .create()
       .withToken()
       .get(this.URL + '/inner')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public findByUser(): Observable<any> {
@@ -43,7 +48,8 @@ export class CompanyService {
       .create()
       .withToken()
       .get(this.URL + '/findByUser')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public findByName(name: string): Observable<any> {
@@ -51,7 +57,8 @@ export class CompanyService {
       .create()
       .withToken()
       .get(this.URL + '/find?name=' + name)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public findById(id: number): Observable<any> {
@@ -59,7 +66,8 @@ export class CompanyService {
       .create()
       .withToken()
       .get(this.URL + '/findById?id=' + id)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public save(req: CompanyReq): Observable<any> {
@@ -67,6 +75,16 @@ export class CompanyService {
       .create()
       .withToken()
       .post(this.URL + '/save', req)
-      .execute();
+      .execute()
+      .pipe(first());
+  }
+
+  public detail(id: number): Observable<any> {
+    return this.clientService
+      .create()
+      .withToken()
+      .get(this.URL + '/detail?id=' + id)
+      .execute()
+      .pipe(first());
   }
 }

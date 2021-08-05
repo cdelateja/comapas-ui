@@ -1,12 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input} from '@angular/core';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {Category, Criterion, IdReq, PositionReq} from "../../../../dto/class.definition";
 import {ObservableService} from "../../../../services/observable.service";
-import {Subscription} from "rxjs";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
-import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons/faGripHorizontal';
+import {faGripHorizontal} from '@fortawesome/free-solid-svg-icons/faGripHorizontal';
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {ClientService, Response} from "../../../../../../../angular-lib/dist/cdelateja";
+import {BaseComponent, ClientService, Response} from "cdelateja";
 import {CriterionService} from "../../../../services/criterion.service";
 
 @Component({
@@ -14,7 +13,7 @@ import {CriterionService} from "../../../../services/criterion.service";
   templateUrl: './sand-box-category-card.component.html',
   styleUrls: ['./sand-box-category-card.component.scss']
 })
-export class SandBoxCategoryCardComponent implements OnInit, OnDestroy {
+export class SandBoxCategoryCardComponent extends BaseComponent {
 
   public PREFIX = 'Components.Structure.SandBox.CategoryCard';
 
@@ -31,20 +30,18 @@ export class SandBoxCategoryCardComponent implements OnInit, OnDestroy {
   public faGripHorizontal = faGripHorizontal;
   public faTrash = faTrash;
   public faPen = faPen;
-  private subscriptions: Subscription[] = [];
 
   constructor(private observableService: ObservableService,
               private criterionService: CriterionService) {
+    super();
   }
 
   public ngOnInit(): void {
-    this.deleteCriterion.subscribe((criterion: Criterion) => {
-      this.removeCriterion(criterion);
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
+    this.pushSubscription(
+      this.deleteCriterion.subscribe((criterion: Criterion) => {
+        this.removeCriterion(criterion);
+      })
+    );
   }
 
   public remove(): void {
@@ -63,27 +60,23 @@ export class SandBoxCategoryCardComponent implements OnInit, OnDestroy {
     moveItemInArray(this.category.criterionList, event.previousIndex, event.currentIndex);
     const request = new PositionReq();
     this.category.criterionList.forEach(c => request.order.push(c.idCriterion))
-    this.subscriptions.push(
-      this.criterionService.position(request).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
+    this.criterionService.position(request).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
 
-        }
-      })
-    );
+      }
+    });
   }
 
   private removeCriterion(criterion: Criterion) {
     const req = new IdReq();
     req.id = criterion.idCriterion
-    this.subscriptions.push(
-      this.criterionService.removeCategory(req).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.category.criterionList.forEach((value: Criterion, index: number) => {
-            if (value.idCriterion == req.id) this.category.criterionList.splice(index, 1);
-          });
-        }
-      })
-    )
+    this.criterionService.removeCategory(req).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.category.criterionList.forEach((value: Criterion, index: number) => {
+          if (value.idCriterion == req.id) this.category.criterionList.splice(index, 1);
+        });
+      }
+    });
   }
 
 }

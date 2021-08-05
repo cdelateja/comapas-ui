@@ -1,1 +1,63 @@
-<p>institute-detail works!</p>
+<div class="card-body">
+
+  <div class="row mb-2">
+
+    <div class="col-md-3 col-sm-12">
+      <div>
+        {{getDrawerProperty('P_C_LABELS') + '.totalAnswered' | translate}}
+      </div>
+      <div>
+        {{instituteInfoRes.totalFields}} / {{fieldsInfoRes.totalFields}}
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <div>
+        {{getDrawerProperty('P_C_LABELS') + '.totalScored' | translate}}
+      </div>
+      <div>
+        {{instituteInfoRes.totalScore}} / {{fieldsInfoRes.totalScore}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-3 col-sm-12">
+      <div>
+        {{getDrawerProperty('P_M_ADDRESS') + '.city' | translate}}
+      </div>
+      <div>
+        {{address.city}}
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <div>
+        {{getDrawerProperty('P_M_ADDRESS') + '.state' | translate}}
+      </div>
+      <div>
+        {{address.state}}
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <div>
+        {{getDrawerProperty('P_M_ADDRESS') + '.street' | translate}}
+      </div>
+      <div>
+        {{address.street}}
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <div>
+        {{getDrawerProperty('P_M_ADDRESS') + '.zipCode' | translate}}
+      </div>
+      <div>
+        {{address.zipCode}}
+      </div>
+    </div>
+
+  </div>
+</div>

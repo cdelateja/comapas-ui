@@ -11,15 +11,15 @@
         <form [formGroup]="formGroup" [attr.id]="formId">
           <div class="form-row">
             <div class="col-md">
-              <ct-textfield [label]="PREFIX+'.id'"
+              <ct-textfield [label]="getDrawerProperty('P_M_USER')+'.id'"
                             [formControlName]="'id'"></ct-textfield>
-              <ct-textfield [label]="PREFIX+'.userName'"
+              <ct-textfield [label]="getDrawerProperty('P_M_USER')+'.userName'"
                             [formControlName]="'username'"></ct-textfield>
-              <ct-textfield [label]="PREFIX+'.password'"
+              <ct-textfield [label]="getDrawerProperty('P_M_USER')+'.password'"
                             [formControlName]="'password'"></ct-textfield>
-              <ct-textfield [label]="PREFIX+'.email'"
+              <ct-textfield [label]="getDrawerProperty('P_M_USER')+'.email'"
                             [formControlName]="'email'"></ct-textfield>
-              <ct-combo-box [label]="PREFIX+'.role'"
+              <ct-combo-box [label]="getDrawerProperty('P_M_USER')+'.role'"
                             [eqVal]="'idRole'"
                             [values]="roles"
                             [itemCaption]="'name'"

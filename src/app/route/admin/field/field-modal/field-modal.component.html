@@ -11,15 +11,15 @@
         <form [formGroup]="formGroup" [attr.id]="formId">
           <div class="form-row">
             <div class="col-md-12 d-none">
-              <ct-textfield [label]="PREFIX+'.idField'"
+              <ct-textfield [label]="getDrawerProperty('P_M_FIELD')+'.idField'"
                             [formControlName]="'idField'"></ct-textfield>
             </div>
             <div class="col-md-6 col-sm-12">
-              <ct-textfield [label]="PREFIX+'.label'"
+              <ct-textfield [label]="getDrawerProperty('P_M_FIELD')+'.label'"
                             [formControlName]="'label'"></ct-textfield>
             </div>
             <div class="col-md-6 col-sm-12">
-              <ct-combo-box [label]="PREFIX+'.type'"
+              <ct-combo-box [label]="getDrawerProperty('P_M_FIELD')+'.type'"
                             [values]="types"
                             [formControlName]="'type'"></ct-combo-box>
             </div>
@@ -31,21 +31,21 @@
           </div>
           <div class="form-row" [ngClass]="{'d-none': hide}">
             <div class="col-md-4 col-sm-12">
-              <ct-number-field [label]="PREFIX+'.score'"
+              <ct-number-field [label]="getDrawerProperty('P_M_FIELD')+'.score'"
                                [formControlName]="'score'"></ct-number-field>
             </div>
             <div class="col-md-4 col-sm-12">
-              <ct-textfield [label]="PREFIX+'.scoreValue'"
+              <ct-textfield [label]="getDrawerProperty('P_M_FIELD')+'.scoreValue'"
                             [formControlName]="'scoreValue'"></ct-textfield>
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-2 col-sm-12">
-              <ct-switch [label]="PREFIX+'.evidence'"
+              <ct-switch [label]="getDrawerProperty('P_M_FIELD')+'.evidence'"
                          [formControlName]="'evidence'"></ct-switch>
             </div>
             <div class="col-md-2 col-sm-12">
-              <ct-switch [label]="PREFIX+'.required'"
+              <ct-switch [label]="getDrawerProperty('P_M_FIELD')+'.required'"
                          [formControlName]="'required'"></ct-switch>
             </div>
           </div>

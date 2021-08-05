@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ClientService, ConfigService} from "cdelateja";
 import {Observable} from "rxjs";
 import {FieldReq, PositionReq} from "../dto/class.definition";
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class FieldService {
       .create()
       .withToken()
       .get(this.URL + '/findAll')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public getTypes(): Observable<any> {
@@ -29,7 +31,8 @@ export class FieldService {
       .withToken()
       .setOptions({bufferSize: 1})
       .get(this.URL + '/types')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public saveField(req: FieldReq): Observable<any> {
@@ -37,7 +40,8 @@ export class FieldService {
       .create()
       .withToken()
       .post(this.URL + '/save', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public getFieldsInfo(): Observable<any> {
@@ -45,7 +49,8 @@ export class FieldService {
       .create()
       .withToken()
       .get(this.URL + '/fieldsInfo')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public position(req: PositionReq): Observable<any> {
@@ -53,6 +58,7 @@ export class FieldService {
       .create()
       .withToken()
       .post(this.URL + '/position', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 }

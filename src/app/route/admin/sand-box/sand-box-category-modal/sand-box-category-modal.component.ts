@@ -60,14 +60,13 @@ export class SandBoxCategoryModalComponent extends AbstractValidator implements 
   public save(): void {
     if (this.validateForm()) {
       const req: CategoryReq = this.formGroup.getRawValue();
-      this.subscriptions.push(
-        this.categoryService.saveCategory(req).subscribe((response: Response) => {
-            if (ClientService.validateData(response)) {
-              this.refresh.next(response.result);
-              this.toggle();
-            }
+      this.categoryService.saveCategory(req).subscribe((response: Response) => {
+          if (ClientService.validateData(response)) {
+            this.refresh.next(response.result);
+            this.toggle();
           }
-        ));
+        }
+      );
     }
   }
 

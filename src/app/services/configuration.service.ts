@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from 'rxjs';
 import {ConfigReq} from '../dto/class.definition';
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,15 @@ export class ConfigurationService {
       .create()
       .withToken()
       .get(this.URL + '/find?name=' + name)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public save(req: ConfigReq): Observable<any> {
     return this.clientService
       .create()
       .withToken().post(this.URL + '/save', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 }

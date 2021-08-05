@@ -1,8 +1,8 @@
-<div class="card">
+<div class="card mt-2">
   <div class="card-body">
     <h1>{{PREFIX + '.title' | translate}}</h1>
 
-    <div class="card">
+    <div class="card mb-2">
       <div class="card-body">
         <div class="row">
           <div class="col-md-2 col-sm-12">
@@ -29,9 +29,9 @@
       </div>
     </div>
 
-    <app-institute-chart-card *ngFor="let institute of institutesInfoRes; let i = index"
+    <app-institute-chart-card *ngFor="let institute of institutes; let i = index"
                               [fieldsInfoRes]="fieldsInfoRes"
-                              [instituteInfoRes]="institute">
+                              [company]="institute">
     </app-institute-chart-card>
 
   </div>

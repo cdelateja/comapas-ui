@@ -6,7 +6,7 @@ import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {faGripHorizontal} from '@fortawesome/free-solid-svg-icons/faGripHorizontal';
 import {getPositionReq, toDynamicFields} from "../../../../common/functions/functions";
-import {ClientService, Response} from "../../../../../../../angular-lib/dist/cdelateja";
+import {ClientService, Response} from "cdelateja";
 import {FieldService} from "../../../../services/field.service";
 
 @Component({
@@ -17,10 +17,10 @@ import {FieldService} from "../../../../services/field.service";
 export class SandBoxCriterionCardComponent extends DynamicForm implements OnInit {
 
   @Input()
-  public criterion: CriterionConfig = new CriterionConfig();
+  public criterion: Criterion = new Criterion();
 
   @Input()
-  public delete: EventEmitter<CriterionConfig>;
+  public delete: EventEmitter<Criterion>;
 
   public faGripHorizontal = faGripHorizontal;
   public faTrash = faTrash;
@@ -37,7 +37,6 @@ export class SandBoxCriterionCardComponent extends DynamicForm implements OnInit
 
   private listByConfig() {
     this.fields = toDynamicFields(this.criterion);
-    this.criterion.dynamicFields = this.fields;
   }
 
   remove() {
@@ -47,13 +46,11 @@ export class SandBoxCriterionCardComponent extends DynamicForm implements OnInit
   public drop(event: CdkDragDrop<Criterion[]>): void {
     moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
     const request = getPositionReq(this.fields, 'idField')
-    this.subscriptions.push(
-      this.fieldService.position(request).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
+    this.fieldService.position(request).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
 
-        }
-      })
-    );
+      }
+    });
   }
 
 }

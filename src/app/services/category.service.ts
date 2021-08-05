@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ClientService, ConfigService} from "../../../../angular-lib/dist/cdelateja";
+import {ClientService, ConfigService} from "cdelateja";
 import {Observable} from "rxjs";
 import {CategoryCriterionReq, CategoryReq, CriterionReq, PositionReq} from "../dto/class.definition";
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class CategoryService {
       .create()
       .withToken()
       .get(this.URL + '/findAll')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public saveCategory(req: CategoryReq): Observable<any> {
@@ -28,7 +30,8 @@ export class CategoryService {
       .create()
       .withToken()
       .post(this.URL + '/save', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public delete(idCategory: number): Observable<any> {
@@ -36,7 +39,8 @@ export class CategoryService {
       .create()
       .withToken()
       .delete(this.URL + '/delete?idCategory=' + idCategory)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public position(req: PositionReq): Observable<any> {
@@ -44,7 +48,8 @@ export class CategoryService {
       .create()
       .withToken()
       .post(this.URL + '/position', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
   public addCriterion(req: CategoryCriterionReq): Observable<any> {
@@ -52,6 +57,7 @@ export class CategoryService {
       .create()
       .withToken()
       .post(this.URL + '/addCriterion', req)
-      .execute();
+      .execute()
+      .pipe(first());
   }
 }

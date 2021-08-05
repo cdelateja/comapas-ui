@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ClientService, ConfigService} from 'cdelateja';
 import {Observable} from "rxjs";
+import {first} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class RoleService {
       .withToken()
       .setOptions({bufferSize: 1})
       .get(this.URL + '/findAll')
-      .execute();
+      .execute()
+      .pipe(first());
   }
 
 }

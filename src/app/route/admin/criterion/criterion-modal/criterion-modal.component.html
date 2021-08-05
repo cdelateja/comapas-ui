@@ -12,9 +12,9 @@
           <div class="form-row">
             <div class="col-md">
               <ct-textfield class="d-none"
-                            [label]="PREFIX+'.idCriterion'"
+                            [label]="getDrawerProperty('P_M_CRITERION')+'.idCriterion'"
                             [formControlName]="'idCriterion'"></ct-textfield>
-              <ct-textfield [label]="PREFIX+'.name'"
+              <ct-textfield [label]="getDrawerProperty('P_M_CRITERION')+'.name'"
                             [formControlName]="'name'"></ct-textfield>
             </div>
           </div>

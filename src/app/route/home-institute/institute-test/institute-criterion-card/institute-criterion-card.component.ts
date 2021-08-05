@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Criterion, Institute, TestCriterionReq, TestFieldReq} from "../../../../../dto/class.definition";
-import {DynamicForm} from "../../../../../common/components/dynamic.form";
+import {Criterion, Institute, TestCriterionReq, TestFieldReq} from "../../../../dto/class.definition";
+import {DynamicForm} from "../../../../common/components/dynamic.form";
 import {TranslateService} from "@ngx-translate/core";
-import {setFieldsValue, toDynamicFields} from "../../../../../common/functions/functions";
+import {setFieldsValue, toDynamicFields} from "../../../../common/functions/functions";
 
 @Component({
   selector: 'app-institute-criterion-card',

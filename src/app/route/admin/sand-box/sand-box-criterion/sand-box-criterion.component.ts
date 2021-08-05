@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {Category, CategoryCriterionReq, Criterion} from "../../../../dto/class.definition";
-import {ButtonType, ClientService, Response} from 'cdelateja';
-import {Subscription} from "rxjs";
+import {BaseComponent, ButtonType, ClientService, Response} from 'cdelateja';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {ObservableService} from "../../../../services/observable.service";
 import {MatPaginator} from "@angular/material/paginator";
@@ -17,7 +16,7 @@ declare var $: any;
   templateUrl: './sand-box-criterion.component.html',
   styleUrls: ['./sand-box-criterion.component.scss']
 })
-export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SandBoxCriterionComponent extends BaseComponent {
 
   public PREFIX = 'Components.Structure.SandBox.CriterionModal';
 
@@ -30,7 +29,6 @@ export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewIn
   public criterionList: Criterion[] = [];
   public faPlus = faPlus;
   public buttonType: ButtonType = new ButtonType();
-  private subscriptions: Subscription[] = [];
   public displayedColumns: string[] = ['select', 'name'];
   public dataSource = new MatTableDataSource(this.criterionList);
   public selection = new SelectionModel<Criterion>(true, []);
@@ -39,6 +37,7 @@ export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewIn
   constructor(private observableService: ObservableService,
               private criterionService: CriterionService,
               private categoryService: CategoryService) {
+    super();
   }
 
   public ngOnInit(): void {
@@ -54,10 +53,6 @@ export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewIn
     );
   }
 
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
   public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
@@ -70,13 +65,11 @@ export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   private findAll(): void {
-    this.subscriptions.push(
-      this.criterionService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.criterionList = response.result;
-        }
-      })
-    );
+    this.criterionService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.criterionList = response.result;
+      }
+    });
   }
 
   public searchByName(word: string): void {
@@ -91,11 +84,6 @@ export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   public close(): void {
-    // const selected: number[] = [];
-    // this.category.criterionList.forEach((select: Criterion) => {
-    //   selected.push(select.idCriterion);
-    // });
-    // this.removeSelected(selected);
     $('#criterionModal').modal('hide');
   }
 
@@ -134,15 +122,13 @@ export class SandBoxCriterionComponent implements OnInit, OnDestroy, AfterViewIn
     this.selection.selected.forEach((select: Criterion) => {
       req.criterionList.push(select.idCriterion);
     });
-    this.subscriptions.push(
-      this.categoryService.addCriterion(req).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.category.criterionList = response.result.criterionList;
-          this.removeSelected(req.criterionList);
-          this.close();
-        }
-      })
-    );
+    this.categoryService.addCriterion(req).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.category.criterionList = response.result.criterionList;
+        this.removeSelected(req.criterionList);
+        this.close();
+      }
+    });
   }
 
   private removeSelectedCriterion(categories: Category[], criterionList: Criterion[]): Criterion[] {

@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, ViewChild} from '@angular/core';
 import {Criterion, CriterionField, CriterionFieldReq, Field} from "../../../../dto/class.definition";
-import {Subscription} from "rxjs";
-import {ButtonType, ClientService, Response} from 'cdelateja';
+import {BaseComponent, ButtonType, ClientService, Response} from 'cdelateja';
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {CriterionService} from "../../../../services/criterion.service";
 import {MatPaginator} from "@angular/material/paginator";
@@ -15,7 +14,7 @@ declare var $: any;
   templateUrl: './criterion-field-modal.component.html',
   styleUrls: ['./criterion-field-modal.component.scss']
 })
-export class CriterionFieldModalComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CriterionFieldModalComponent extends BaseComponent {
 
   @ViewChild(MatPaginator)
   public paginator: MatPaginator;
@@ -23,10 +22,10 @@ export class CriterionFieldModalComponent implements OnInit, OnDestroy, AfterVie
   public PREFIX = 'Components.Structure.Criterion.FieldModal';
 
   @Input()
-  public refresh: EventEmitter<Field> = new EventEmitter();
+  public refresh: EventEmitter<Criterion> = new EventEmitter();
 
   @Input()
-  public open: EventEmitter<Field> = new EventEmitter();
+  public open: EventEmitter<Criterion> = new EventEmitter();
 
   @Input()
   public fields: Field[] = [];
@@ -36,14 +35,14 @@ export class CriterionFieldModalComponent implements OnInit, OnDestroy, AfterVie
   public selection = new SelectionModel<Field>(true, []);
   public faCheck = faCheck;
   public buttonType: ButtonType = new ButtonType();
-  private subscriptions: Subscription[] = [];
   public criterion: Criterion = new Criterion();
 
   constructor(private criterionService: CriterionService) {
+    super();
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
+    this.pushSubscription(
       this.open.subscribe((criterion: Criterion) => {
         this.dataSource = new MatTableDataSource(this.fields);
         this.criterion = criterion;
@@ -55,10 +54,6 @@ export class CriterionFieldModalComponent implements OnInit, OnDestroy, AfterVie
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   private addSelectedFields(criterion: Criterion) {
@@ -102,15 +97,13 @@ export class CriterionFieldModalComponent implements OnInit, OnDestroy, AfterVie
     this.selection.selected.forEach((select: Field) => {
       req.fields.push(select.idField);
     });
-    this.subscriptions.push(
-      this.criterionService.addFields(req).subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.criterion = response.result;
-          this.refresh.next(response.result);
-          this.close();
-        }
-      })
-    );
+    this.criterionService.addFields(req).subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.criterion = response.result;
+        this.refresh.next(response.result);
+        this.close();
+      }
+    });
   }
 
   isAllSelected() {

@@ -49,8 +49,8 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {InstituteTableComponent} from './route/home/institute/institute-table/institute-table.component';
 import {InstituteModalComponent} from './route/home/institute/institute-modal/institute-modal.component';
 import {InstituteDetailComponent} from './route/home/institute/institute-detail/institute-detail.component';
-import {InstituteTestComponent} from './route/home/institute/institute-test/institute-test.component';
-import {InstituteCriterionCardComponent} from './route/home/institute/institute-test/institute-criterion-card/institute-criterion-card.component';
+import {InstituteTestComponent} from './route/home-institute/institute-test/institute-test.component';
+import {InstituteCriterionCardComponent} from './route/home-institute/institute-test/institute-criterion-card/institute-criterion-card.component';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {UploadComponent} from './common/components/upload/upload.component';
 import {ViewFileComponent} from './common/components/view-file/view-file.component';
@@ -60,11 +60,12 @@ import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import {InstituteChartComponent} from './route/home/institute/institute-chart/institute-chart.component';
 import {InstituteChartCardComponent} from './route/home/institute/institute-chart/institute-chart-card/institute-chart-card.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { SandBoxCategoryModalComponent } from './route/admin/sand-box/sand-box-category-modal/sand-box-category-modal.component';
-import { SandBoxCategoryCardComponent } from './route/admin/sand-box/sand-box-category-card/sand-box-category-card.component';
-import { InstituteCategoryCardComponent } from './route/home/institute/institute-test/institute-category-card/institute-category-card.component';
-import { InstituteTestFooterComponent } from './route/home/institute/institute-test/institute-test-footer/institute-test-footer.component';
-import { HomeInstituteComponent } from './route/home-institute/home-institute.component';
+import {SandBoxCategoryModalComponent} from './route/admin/sand-box/sand-box-category-modal/sand-box-category-modal.component';
+import {SandBoxCategoryCardComponent} from './route/admin/sand-box/sand-box-category-card/sand-box-category-card.component';
+import {InstituteCategoryCardComponent} from './route/home-institute/institute-test/institute-category-card/institute-category-card.component';
+import {InstituteTestFooterComponent} from './route/home-institute/institute-test/institute-test-footer/institute-test-footer.component';
+import {HomeInstituteComponent} from './route/home-institute/home-institute.component';
+import {InstituteAddressModalComponent} from './route/home/institute/institute-modal/institute-address-modal/institute-address-modal.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { HomeInstituteComponent } from './route/home-institute/home-institute.co
     SandBoxCategoryCardComponent,
     InstituteCategoryCardComponent,
     InstituteTestFooterComponent,
-    HomeInstituteComponent
+    HomeInstituteComponent,
+    InstituteAddressModalComponent
   ],
   imports: [
     BrowserModule,

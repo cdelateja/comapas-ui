@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {Company, IdReq, Role, User} from '../../../dto/class.definition';
-import {AbstractComponent, ClientService, ConfirmationDialog, Response} from 'cdelateja';
-import {Subscription} from "rxjs";
+import {BaseComponent, ClientService, ConfirmationDialog, Response} from 'cdelateja';
 import {faPencilAlt} from "@fortawesome/free-solid-svg-icons/faPencilAlt";
 import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
@@ -17,7 +16,7 @@ import {CompanyService} from "../../../services/company.service";
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
+export class UserComponent extends BaseComponent {
 
   @ViewChild(MatPaginator)
   public paginator: MatPaginator;
@@ -29,7 +28,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   public faCheck = faCheck;
   public faTimesCircle = faTimesCircle;
   public users: User[] = [];
-  private subscriptions: Subscription[] = [];
   public roles: Role[] = [];
   private user: User;
   public company: Company;
@@ -42,14 +40,13 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
               protected translate: TranslateService,
               private companyService: CompanyService,
               private confirmationDialog: ConfirmationDialog) {
-    this.subscriptions.push(
-      this.roleService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.roles = response.result
-        }
-      })
-    )
-    this.subscriptions.push(
+    super();
+    this.roleService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.roles = response.result
+      }
+    })
+    this.pushSubscription(
       this.confirmationDialog.getYesConfirmation().subscribe(() => {
         const req: IdReq = new IdReq();
         req.id = this.user.id;
@@ -63,9 +60,11 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.refresh.subscribe((user: User) => {
-      this.refreshUser(user);
-    });
+    this.pushSubscription(
+      this.refresh.subscribe((user: User) => {
+        this.refreshUser(user);
+      })
+    );
     this.findInnerCompany();
   }
 
@@ -78,14 +77,12 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public findInnerCompany() {
-    this.subscriptions.push(
-      this.companyService.findInner().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.company = response.result;
-          this.findUsers(this.company.idCompany);
-        }
-      })
-    );
+    this.companyService.findInner().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.company = response.result;
+        this.findUsers(this.company.idCompany);
+      }
+    });
   }
 
   public findUsers(idCompany: number) {

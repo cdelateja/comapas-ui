@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, ViewChild} from '@angular/core';
 import {faPencilAlt} from '@fortawesome/free-solid-svg-icons/faPencilAlt';
 import {Field} from '../../../dto/class.definition';
-import {Subscription} from 'rxjs';
 import {FieldService} from '../../../services/field.service';
-import {ClientService, Response} from 'cdelateja';
+import {BaseComponent, ClientService, Response} from 'cdelateja';
 import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
@@ -13,23 +12,23 @@ import {MatTableDataSource} from "@angular/material/table";
   templateUrl: './field.component.html',
   styleUrls: ['./field.component.scss']
 })
-export class FieldComponent implements OnInit, OnDestroy, AfterViewInit {
+export class FieldComponent extends BaseComponent {
 
   @ViewChild(MatPaginator)
   public paginator: MatPaginator;
 
   public PREFIX = 'Components.Structure.Field';
 
-  public displayedColumns: string[] = ['idField', 'label', 'score', 'type', 'catalog', 'evidence','required', 'edit'];
+  public displayedColumns: string[] = ['idField', 'label', 'score', 'type', 'catalog', 'evidence', 'required', 'edit'];
   public faPencilAlt = faPencilAlt;
   public faCheck = faCheck;
-  private subscriptions: Subscription[] = [];
   public fields: Field[] = [];
   public dataSource = new MatTableDataSource(this.fields);
   public open: EventEmitter<Field> = new EventEmitter();
   public refresh: EventEmitter<Field> = new EventEmitter();
 
   constructor(private fieldService: FieldService) {
+    super();
   }
 
   public ngOnInit(): void {
@@ -43,19 +42,13 @@ export class FieldComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
   private findFields(): void {
-    this.subscriptions.push(
-      this.fieldService.findAll().subscribe((response: Response) => {
-        if (ClientService.validateData(response)) {
-          this.fields = response.result;
-          this.dataSource.data = this.fields;
-        }
-      })
-    );
+    this.fieldService.findAll().subscribe((response: Response) => {
+      if (ClientService.validateData(response)) {
+        this.fields = response.result;
+        this.dataSource.data = this.fields;
+      }
+    });
   }
 
   public addField(): void {

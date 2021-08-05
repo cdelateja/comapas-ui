@@ -23,10 +23,10 @@ export class CriterionModalComponent extends AbstractValidator implements OnInit
   public PREFIX = 'Components.Structure.Criterion.Modal';
 
   @Input()
-  public refresh: EventEmitter<Field> = new EventEmitter();
+  public refresh: EventEmitter<Criterion> = new EventEmitter();
 
   @Input()
-  public open: EventEmitter<Field> = new EventEmitter();
+  public open: EventEmitter<Criterion> = new EventEmitter();
 
   constructor(protected translate: TranslateService,
               private criterionService: CriterionService) {
@@ -57,16 +57,14 @@ export class CriterionModalComponent extends AbstractValidator implements OnInit
 
   public save(): void {
     if (this.validateForm()) {
-      const req: CriterionReq = this.formGroup.getRawValue();
-      this.subscriptions.push(
-        this.criterionService.saveCriterion(req).subscribe((response: Response) => {
-            if (ClientService.validateData(response)) {
-              this.refresh.next(response.result);
-              this.toggle();
-            }
+      const req: CriterionReq = this.getValue();
+      this.criterionService.saveCriterion(req).subscribe((response: Response) => {
+          if (ClientService.validateData(response)) {
+            this.refresh.next(response.result);
+            this.toggle();
           }
-        ));
+        }
+      );
     }
   }
-
 }

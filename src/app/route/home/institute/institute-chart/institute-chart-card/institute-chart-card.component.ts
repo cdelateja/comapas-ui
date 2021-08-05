@@ -1,8 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Company, FieldsInfoRes, InstituteInfoRes} from "../../../../../dto/class.definition";
+import {Company, CompanyRes, FieldsInfoRes, InstituteInfoRes} from "../../../../../dto/class.definition";
 import {CompanyService} from "../../../../../services/company.service";
 import {Subscription} from "rxjs";
-import {ClientService, Response} from "../../../../../../../../angular-lib/dist/cdelateja";
+import {ClientService, Response} from "cdelateja";
+import {InstituteService} from "../../../../../services/institute.service";
 
 @Component({
   selector: 'app-institute-chart-card',
@@ -14,30 +15,31 @@ export class InstituteChartCardComponent implements OnInit, OnDestroy {
   public PREFIX = 'Components.Structure.Institute.Chart.Card';
 
   @Input()
-  public instituteInfoRes: InstituteInfoRes;
+  public company: CompanyRes;
 
   @Input()
   public fieldsInfoRes: FieldsInfoRes;
 
   private subscriptions: Subscription[] = [];
-  public company: Company = new Company();
+  public instituteInfoRes: InstituteInfoRes = new InstituteInfoRes();
 
-  constructor(private companyService: CompanyService) {
+  constructor(private companyService: CompanyService,
+              private instituteService: InstituteService) {
   }
 
   public ngOnInit(): void {
-    this.findCompany();
+    this.findInstituteInfo();
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  private findCompany(): void {
+  private findInstituteInfo() {
     this.subscriptions.push(
-      this.companyService.findById(this.instituteInfoRes.idInstitute).subscribe((response: Response) => {
+      this.instituteService.getInstituteInfo(this.company.idCompany).subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
-          this.company = response.result;
+          this.instituteInfoRes = response.result;
         }
       })
     );
