@@ -19,7 +19,7 @@ body {
 }
 
 .cdk-overlay-container {
-  z-index: 1051 !important;
+  z-index: 1056 !important;
 }
 
 table {
@@ -137,5 +137,9 @@ table {
 
   .dragAndDrop {
     cursor: move;
+  }
+
+  .progress {
+    display: block;
   }
 }

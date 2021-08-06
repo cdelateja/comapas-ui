@@ -66,6 +66,7 @@ import {InstituteCategoryCardComponent} from './route/home-institute/institute-t
 import {InstituteTestFooterComponent} from './route/home-institute/institute-test/institute-test-footer/institute-test-footer.component';
 import {HomeInstituteComponent} from './route/home-institute/home-institute.component';
 import {InstituteAddressModalComponent} from './route/home/institute/institute-modal/institute-address-modal/institute-address-modal.component';
+import { ScrollSpyDirective } from './directives/scroll-spy.directive';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import {InstituteAddressModalComponent} from './route/home/institute/institute-m
     InstituteCategoryCardComponent,
     InstituteTestFooterComponent,
     HomeInstituteComponent,
-    InstituteAddressModalComponent
+    InstituteAddressModalComponent,
+    ScrollSpyDirective
   ],
   imports: [
     BrowserModule,

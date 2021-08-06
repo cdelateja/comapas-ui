@@ -1,7 +1,7 @@
 <div class="card border-primary category-card mb-2">
   <div class="card-header">
-    <div class="float-right">
-      <button type="button" class="btn btn-outline-secondary mr-1" (click)="edit()">
+    <div class="float-end">
+      <button type="button" class="btn btn-outline-secondary me-1" (click)="edit()">
         <fa-icon [icon]="faPen"></fa-icon>
       </button>
       <button type="button" class="btn btn-outline-danger" (click)="remove()">
@@ -26,9 +26,10 @@
         </div>
       </div>
     </div>
-
-    <button type="button" class="btn btn-outline-secondary btn-block" (click)="addCriterion()">
-      {{PREFIX + '.btnAddCriterion' | translate}}
-    </button>
+    <div class="d-grid gap-2">
+      <button type="button" class="btn btn-outline-secondary btn-block" (click)="addCriterion()">
+        {{PREFIX + '.btnAddCriterion' | translate}}
+      </button>
+    </div>
   </div>
 </div>

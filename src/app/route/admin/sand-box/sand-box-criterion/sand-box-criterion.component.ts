@@ -77,10 +77,7 @@ export class SandBoxCriterionComponent extends BaseComponent {
   }
 
   private toggle(): void {
-    $('#criterionModal').modal({
-      keyboard: false,
-      backdrop: 'static'
-    });
+    $('#criterionModal').modal('toggle');
   }
 
   public close(): void {

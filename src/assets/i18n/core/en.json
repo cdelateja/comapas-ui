@@ -68,6 +68,10 @@
       },
       "ViewFile": {
         "title": "Visualización de archivo"
+      },
+      "Labels": {
+        "totalAnswered": "Preguntas resueltas",
+        "totalScored": "Puntaje total"
       }
     },
     "Table": {

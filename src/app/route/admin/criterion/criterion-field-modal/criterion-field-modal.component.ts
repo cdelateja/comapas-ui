@@ -81,10 +81,7 @@ export class CriterionFieldModalComponent extends BaseComponent {
   }
 
   private toggle(): void {
-    $('#FieldModal').modal({
-      keyboard: false,
-      backdrop: 'static'
-    });
+    $('#FieldModal').modal('toggle');
   }
 
   public searchByWord(word: string): void {

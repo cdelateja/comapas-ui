@@ -24,4 +24,5 @@ export class AppComponent extends BaseComponent {
     this.setDrawerProperty(UtilProperties.PREFIX_MODEL_ADDRESS, 'P_M_ADDRESS');
     this.setDrawerProperty(UtilProperties.PREFIX_LABELS, 'P_C_LABELS');
   }
+
 }

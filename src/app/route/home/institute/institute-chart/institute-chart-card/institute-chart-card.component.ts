@@ -22,6 +22,7 @@ export class InstituteChartCardComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   public instituteInfoRes: InstituteInfoRes = new InstituteInfoRes();
+  public progress = 0;
 
   constructor(private companyService: CompanyService,
               private instituteService: InstituteService) {
@@ -40,12 +41,13 @@ export class InstituteChartCardComponent implements OnInit, OnDestroy {
       this.instituteService.getInstituteInfo(this.company.idCompany).subscribe((response: Response) => {
         if (ClientService.validateData(response)) {
           this.instituteInfoRes = response.result;
+          this.progress = this.getProgress();
         }
       })
     );
   }
 
-  public getProgress(): number {
+  private getProgress(): number {
     return (this.instituteInfoRes.totalFields * 100) / this.fieldsInfoRes.totalFields;
   }
 

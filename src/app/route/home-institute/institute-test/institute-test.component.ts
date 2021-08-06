@@ -8,6 +8,8 @@ import {FileService} from "../../../services/file.service";
 import {CategoryService} from "../../../services/category.service";
 import {InstituteCategoryCardComponent} from "./institute-category-card/institute-category-card.component";
 
+declare var $: any;
+
 @Component({
   selector: 'app-institute-test',
   templateUrl: './institute-test.component.html',
@@ -23,6 +25,7 @@ export class InstituteTestComponent extends BaseComponent {
   public institute: Institute;
   private idInstitute: number;
   public categories: Category[] = [];
+  public currentSection = 'section1';
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -39,6 +42,10 @@ export class InstituteTestComponent extends BaseComponent {
 
   ngOnInit(): void {
     this.findInstitute();
+  }
+
+  public ngAfterViewInit(): void {
+    super.ngAfterViewInit();
   }
 
   private findInstitute(): void {
@@ -65,6 +72,7 @@ export class InstituteTestComponent extends BaseComponent {
     this.categoryService.findAll().subscribe((response: Response) => {
       if (ClientService.validateData(response)) {
         this.categories = response.result;
+        this.currentSection = 'cat' + this.categories[0].idCategory
       }
     });
   }
@@ -96,5 +104,14 @@ export class InstituteTestComponent extends BaseComponent {
         }
       });
     }
+  }
+
+  public onSectionChange(sectionId: string) {
+    this.currentSection = sectionId;
+  }
+
+  public scrollTo(section) {
+    document.querySelector('#cat' + section)
+      .scrollIntoView();
   }
 }
